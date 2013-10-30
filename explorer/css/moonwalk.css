@@ -1,0 +1,77 @@
+#header {
+  background: #000;
+  background-image: url(../images/moonrise.png);
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  padding: 40px 0;
+  box-shadow:0 0 20px black inset, 0 0 4px black;
+}
+#header a#logo {
+  background: none;
+  padding: 0;
+  font-weight: normal;
+}
+#header form#api_selector input[type="text"] {
+  border: 1px solid #fff;
+  height: 18px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.8);
+}
+#header form#api_selector .input a#explore {
+  background: #999;
+}
+#header form#api_selector .input a#explore:hover {
+  background: #ccc;
+  box-shadow: 0px 0px 10px #fff;
+}
+.swagger-ui-wrap .notes ul, .swagger-ui-wrap .notes ol {
+  color: #333333;
+  padding: 0;
+  margin: 0 2em;
+  padding: 0 0 10px;
+}
+.swagger-ui-wrap .notes ul ul, .swagger-ui-wrap .notes ol ol, 
+.swagger-ui-wrap .notes ul ol, .swagger-ui-wrap .notes ol ul {
+  padding: 0;
+}
+.swagger-ui-wrap .notes ul {
+  list-style: square;
+}
+.swagger-ui-wrap .notes ol {
+  list-style: decimal;
+}
+.swagger-ui-wrap .notes li {
+}
+.swagger-ui-wrap .notes ol li {
+  font-size: inherit;
+  padding: 0;
+}
+.swagger-ui-wrap .notes code {
+  font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+  background-color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+  font-size: 90%;
+  padding: 2px 4px;
+}
+.swagger-ui-wrap .notes pre code {
+  background: initial;
+  border: initial;
+}
+.swagger-ui-wrap .notes blockquote {
+  background-color: rgba(255,255,255,0.6);
+  border-left: 4px solid rgba(0,0,0,0.1);
+  padding: 10px 10px 0;
+  margin-bottom: 10px;
+}
+.swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation div.heading h3 span.http_method a {
+  line-height: 32px;
+  padding: none;
+}
+.swagger-ui-wrap .toggleOperation code {
+  display: block;
+  text-align:right
+}
+.swagger-ui-wrap .toggleOperation span {
+  color: #666;
+}

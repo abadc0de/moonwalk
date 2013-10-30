@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond $1 !(^index\.lua)
+RewriteRule ^(.*)$ index.lua/$1 [L]
+
