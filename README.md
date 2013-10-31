@@ -225,6 +225,19 @@ quickly.
   
 *   Make sure any files with the shebang are executable (chmod +x).
 
+## Mongoose setup ##
+
+Mongoose support is currently a bit sketchy. Invoke Mongoose something
+like this to get things working the same as the CGI example. I'll talk
+with Sergey and see if he can have Mongoose expose a few things to the
+Lua environment that would help, such as the script location and the
+current path. A way to run .lua files directly without needing .lp files
+would also be nice.
+
+    /path/to/mongoose-lua \
+    -document_root /srv/www/moonwalk/ \
+    -url_rewrite_patterns  /example/**=example/index.lp
+
 ## License ##
 
 Copyright 2013 Moonwalk Authors

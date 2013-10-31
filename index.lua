@@ -5,7 +5,8 @@ local markdown = require('lib/markdown')
 
 mw.send [[Content-Type: text/html
 
-<doctype html>
+<!doctype html>
+<html>
 <head><title>Moonwalk</title>
 <style>
 body { font: 13px "Droid Sans", sans-serif; color: #333; margin:0; padding: 0;
@@ -34,4 +35,4 @@ pre code { padding: 1em; display: block; }
 
 mw.send(markdown(io.open 'README.md':read '*a'))
 
-mw.send '</div></body>'
+mw.send '</div></body></html>'
