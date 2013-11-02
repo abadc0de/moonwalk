@@ -264,6 +264,7 @@ local function parse_doc(name, fn, referenced_models)
         :gsub('{notes}', notes)
   end
   
+  -- markdown the "notes" section
   if config.use_markdown and notes ~= '' then
     local markdown = require "lib/markdown"
     notes = markdown(notes)
@@ -300,23 +301,28 @@ local function parse_doc(name, fn, referenced_models)
     p.paramType = v:match(patterns.from)
     p.format = v:match(patterns.format)
     p.required = not v:match(patterns.optional)
-      -- numbers
+    -- numbers
     p.maximum = tonumber(v:match(patterns.maximum))
     p.minimum = tonumber(v:match(patterns.minimum))
     p.multipleOf = tonumber(v:match(patterns.multipleOf))
-      -- strings
+    -- strings
     p.maxLength = tonumber(v:match(patterns.maxLength))
     p.minLength = tonumber(v:match(patterns.minLength))
     p.pattern = v:match(patterns.pattern)
-      -- arrays
+    -- arrays
     p.maxItems = tonumber(v:match(patterns.maxItems))
     p.minItems = tonumber(v:match(patterns.minItems))
     p.uniqueItems = not v:match(patterns.uniqueItems)
     
+    -- if we have a data type matching one of our validation keywords,
+    -- it's not really a data type, so unset it
     if p.dataType and patterns[p.dataType] then p.dataType = nil end
     
+    -- default data type is string
     if not p.dataType then p.dataType = 'string' end
     
+    -- default param type is "path" if there's a matching token in the path,
+    -- or "form" if the operation wants a POST, or "query" otherwise. 
     if not p.paramType then
       if path:match('{' .. p.name .. '}') then
         p.paramType = 'path'
@@ -326,10 +332,12 @@ local function parse_doc(name, fn, referenced_models)
         p.paramType = 'query'
       end
     end
+    -- if the data type is a model, put the model in our resource listing
     insert_model(p.dataType, referenced_models)
     table.insert(params, p)
   end
   
+  -- if the return type is a model, put the model in our resource listing
   insert_model(return_type, referenced_models)
   
   return path, {
@@ -524,6 +532,7 @@ local function resolve_operation_path(request_path)
           for k, v in ipairs(info.parameters) do
             local arg_value
             local success = false
+            -- figure out where to get the argument from, and get it
             if v.paramType == 'path' then
               arg_value = named_path_args[v.name]
               request.path_args[v.name] = arg_value
@@ -542,6 +551,7 @@ local function resolve_operation_path(request_path)
             else
               arg_value = nil
             end
+            -- type conversion and validation
             if arg_value then
               if v.dataType == 'array' or v.dataType == 'object' then
                 arg_value = check_object(arg_value, v)
@@ -554,7 +564,7 @@ local function resolve_operation_path(request_path)
               end
               if is_finished then return end
             end
-            -- TODO: enforce required
+            -- enforce required params
             if v.required and arg_value == nil then
               return fail("Parameter '" .. v.name .. "' is required")
             end

@@ -2,10 +2,13 @@
 
 Moonwalk is a [Swagger][1] server implementation for Lua.
 
-Moonwalk is designed to work under various host environments,
-such as CGI, the Mongoose embedded web server, and others. 
+Moonwalk is designed to work under various host environments.
+Currently CGI and the [Mongoose][2] and [Civetweb][3] embedded web
+servers are supported, and support can easily be added for others. 
 
 [1]: http://developers.helloreverb.com/swagger/
+[2]: https://github.com/cesanta/mongoose
+[3]: https://github.com/sunsetbrew/civetweb
 
 ## Documenting your API ##
 
@@ -44,10 +47,10 @@ Instead of comments, the following construct is used to create a doc block:
 *   The concatenation operator, `..` 
 *   A function definition (the "operation").
 
-For some background on this technique, see the [DecoratorsAndDocstrings][2]
+For some background on this technique, see the [DecoratorsAndDocstrings][4]
 page in the Lua users wiki.
 
-[2]: http://lua-users.org/wiki/DecoratorsAndDocstrings
+[4]: http://lua-users.org/wiki/DecoratorsAndDocstrings
 
 ### The @path tag ###
 
@@ -108,10 +111,10 @@ punctuation. For example:
 
 In addition to a *data type* and *param type*, the `@param` tag may
 include additional validation annotations within the parentheses following
-the parameter name. Recognized annotations draw from the [JSON Schema][3]
+the parameter name. Recognized annotations draw from the [JSON Schema][5]
 validation specification, in keeping with Swagger.
 
-[3]:http://json-schema.org/latest/json-schema-validation.html
+[5]:http://json-schema.org/latest/json-schema-validation.html
 
 ### Validation for all types ###
 
@@ -225,22 +228,23 @@ quickly.
   
 *   Make sure any files with the shebang are executable (chmod +x).
 
-## Mongoose setup ##
+## Mongoose/Civetweb setup ##
 
-Mongoose support is currently a bit sketchy. Invoke Mongoose something
-like this to get things working the same as the CGI example. I'll talk
-with Sergey and see if he can have Mongoose expose a few things to the
-Lua environment that would help, such as the script location and the
-current path. A way to run .lua files directly without needing .lp files
-would also be nice.
+Mongoose/Civetweb support is currently a bit sketchy. Invoke the server
+something like this to get things working the same as the CGI example.
 
-    /path/to/mongoose-lua \
+    /path/to/server/binary \
     -document_root /srv/www/moonwalk/ \
-    -url_rewrite_patterns  /example/**=example/index.lp
+    -url_rewrite_patterns /example/**=example/index.lp
+
+There are a few fairly trivial features that could be added to Mongoose
+and Civetweb to allow Moonwalk to better support those environments.
+Some of these things are already being discussed, and will hopefully
+be added in the somewhat near future.
 
 ## License ##
 
-Copyright 2013 Moonwalk Authors
+Copyright &copy; 2013 Moonwalk Authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -262,6 +266,10 @@ THE SOFTWARE.
 
 ## References ##
 
+Lua references:
+
+*   [Lua 5.2 user manual](http://www.lua.org/manual/5.2/)
+
 Swagger references:
 
 *   [Swagger wiki](https://github.com/wordnik/swagger-core/wiki)
@@ -271,4 +279,12 @@ CGI references:
 *   [CGI spec](http://www.ietf.org/rfc/rfc3875)
 
 *   [Apache CGI docs](http://httpd.apache.org/docs/2.2/howto/cgi.html)
+
+Mongoose and Civetweb references:
+
+*   [Mongoose Lua server pages](https://github.com/cesanta/mongoose/blob/master/docs/LuaSqlite.md)
+
+*   [Mongoose users group](http://groups.google.com/group/mongoose-users)
+
+*   [Civetweb users group](http://groups.google.com/group/civetweb)
 
