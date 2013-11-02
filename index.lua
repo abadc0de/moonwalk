@@ -31,6 +31,10 @@ pre code { padding: 1em; display: block; }
   <p>Zero-friction REST APIs for Lua</p>
 </div></div>
 <div class="content">
+<h1> It works! </h1>
+<p> Moonwalk appears to be working properly. You may want to try the
+<a href="./explorer/">API Explorer</a> with the example API, or read
+the documentation below.</p>
 ]]
 
 mw.send(markdown(io.open 'README.md':read '*a'))
