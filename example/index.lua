@@ -1,11 +1,8 @@
 #! /usr/bin/lua
 
-package.path = "../?.lua;" .. package.path
-
-local api = require 'moonwalk'
-
-api.config.pretty_json = true
+local api = require 'moonwalk/init'
 
 api.register 'user'
 
-api.handle_request()
+api.handle_request(...)
+

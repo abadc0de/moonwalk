@@ -242,6 +242,14 @@ and Civetweb to allow Moonwalk to better support those environments.
 Some of these things are already being discussed, and will hopefully
 be added in the somewhat near future.
 
+## LuaNode setup ##
+
+Experimental support for LuaNode is included. Invoke the sever like this:
+
+    /path/to/luanode server/luanode.lua /example/ 8910
+    
+Where "/example/" is your API root and "8080" is the port to use.
+
 ## License ##
 
 Copyright &copy; 2013 Moonwalk Authors

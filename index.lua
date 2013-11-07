@@ -1,11 +1,12 @@
 #! /usr/bin/lua
 
-local mw = require('moonwalk')
-local markdown = require('lib/markdown')
+local moonwalk = require 'moonwalk/init'
+local markdown = require 'moonwalk/lib/markdown'
+local conn = moonwalk.get_connection(...)
 
-mw.send [[Content-Type: text/html
+conn:send_head('200 OK', { ['Content-Type'] = 'text/html' })
 
-<!doctype html>
+conn:send [[<!doctype html>
 <html>
 <head><title>Moonwalk</title>
 <style>
@@ -37,6 +38,7 @@ pre code { padding: 1em; display: block; }
 the documentation below.</p>
 ]]
 
-mw.send(markdown(io.open 'README.md':read '*a'))
+conn:send(markdown(io.open 'README.md':read '*a'))
 
-mw.send '</div></body></html>'
+conn:send '</div></body></html>'
+

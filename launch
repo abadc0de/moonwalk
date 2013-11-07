@@ -1,0 +1,32 @@
+#!/bin/bash
+
+usage="Usage: $0 <host> [path] [port]
+ - <host> should be 'luanode', 'mongoose', or 'civetweb'.
+ - <path> should be the path to your api, like 'example'.
+ - <port> should be the port number to run on, like '80'.
+"
+
+host="$1" # host environment
+path="$2" # path to project
+port="$3" # port to serve on
+
+if [ "$host" == "" ]; then
+  host="civetweb"
+fi
+
+if [ "$path" == "" ]; then
+  path="example"
+fi
+
+if [ "$port" == "" ]; then
+  port="8910"
+fi
+
+if [ "$host" == "luanode" ]; then
+  bin/luanode moonwalk/server/luanode.lua /$path/ $port
+elif [ "$host" == "mongoose" ] || [ "$host" == "civetweb" ]; then
+  bin/$host -document_root .. -listening_ports $port \
+  -url_rewrite_patterns /$path/**=$path/index.lp
+else
+  echo "$usage"
+fi

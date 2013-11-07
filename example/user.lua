@@ -1,6 +1,6 @@
-local api = require 'moonwalk'
+local api = require 'moonwalk/init'
 
-api.model.User = {
+api.model "User" {
   id = {
     type = "integer",
     minimum = 1,
@@ -38,10 +38,10 @@ return api.module "User stuff" {
     @return (boolean): Returns `true` if successful, else `false`.
   
   ]] .. 
-  function(id, reason, dryRun)
+  function(id, reason, dryRun, connection)
   
     return {status = "success", message = "user deleted", 
-        args = {id, reason, dryRun} }
+        request = connection.request }
   
   end,
   
@@ -56,9 +56,9 @@ return api.module "User stuff" {
     @return (User): User details.
   
   ]] ..
-  function(...)
+  function(id, connection)
     
-    return { name = "get user", args = {...} }
+    return { id = id, name = "bob", request = connection.request }
   
   end,
   
