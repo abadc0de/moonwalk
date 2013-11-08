@@ -10,6 +10,24 @@ servers are supported, and support can easily be added for others.
 [2]: https://github.com/cesanta/mongoose
 [3]: https://github.com/sunsetbrew/civetweb
 
+## Installing Moonwalk ##
+
+You can install the latest version of Moonwalk with LuaRocks:
+
+    luarocks install moonwalk --from=http://abadc0de.github.io/moonwalk/rocks
+
+Or, you can clone this repository and move/copy/symlink the inner `moonwalk`
+directory into your Lua package path:
+
+    cd ~/my/stuff
+    git clone https://github.com/abadc0de/moonwalk.git
+    cd ~/my/webroot
+    ln -s ~/my/stuff/moonwalk/moonwalk .
+    
+Obviously you'll want to replace `~/my/stuff` with the location you want
+to clone the repo to, and `~/my/webroot` with your web root or some
+other location in your Lua package path.
+
 ## Documenting your API ##
 
 Functions in your API should be decorated with doc blocks.

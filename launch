@@ -4,14 +4,21 @@ build() {
 
   package="moonwalk"
   version="1.0-1"
+  source_url="https://github.com/abadc0de/moonwalk"
   name="$package-$version"
-  rm rocks/*
-  cd rocks
-  luarocks build --local ../rockspec/$name.rockspec
+  rm -rf rocks/*
+  luarocks build --local rockspec/$name.rockspec
   luarocks pack $package
-  cp ../rockspec/$name.rockspec .
-  luarocks-admin make-manifest .
-  cd ..
+  mv *.rock rocks
+  cp rockspec/$name.rockspec rocks/
+  luarocks-admin make-manifest rocks/
+  mkdir rocks/$package
+  echo "<!doctype html>
+<html><head><title>Redirecting...</title>
+<meta http-equiv='refresh' content='2; url=$source_url'>
+</head><body>
+<code>Redirecting to <a href='$source_url'>$source_url</a></code>
+</body></html>" > rocks/$package/index.html
 }
 
 if [ "$1" == "build" ]; then

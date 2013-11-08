@@ -1,6 +1,6 @@
 package = "moonwalk"
 version = "1.0-1"
-source = { url = "../moonwalk", dir = "moonwalk" }
+source = { url = "moonwalk", dir = "moonwalk" }
 description = {
    summary = "Zero-friction REST APIs for Lua.",
    
