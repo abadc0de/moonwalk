@@ -26,7 +26,7 @@ if [ "$1" == "build" ]; then
 else
 
   usage="Usage: $0 <host> [path] [port]
-   - <host> should be 'luanode', 'mongoose', or 'civetweb'.
+   - <host> should be 'socket', 'luanode', 'mongoose', or 'civetweb'.
    - <path> should be the path to your api, like 'example'.
    - <port> should be the port number to run on, like '80'.
   "
@@ -36,7 +36,7 @@ else
   port="$3" # port to serve on
 
   if [ "$host" == "" ]; then
-    host="civetweb"
+    host="socket"
   fi
 
   if [ "$path" == "" ]; then
@@ -46,8 +46,11 @@ else
   if [ "$port" == "" ]; then
     port="8910"
   fi
-
-  if [ "$host" == "luanode" ]; then
+  
+  if [ "$host" == "socket" ]; then
+    build
+    lua moonwalk/server/socket.lua /$path/ $port
+  elif [ "$host" == "luanode" ]; then
     build
     bin/luanode moonwalk/server/luanode.lua /$path/ $port
   elif [ "$host" == "mongoose" ] || [ "$host" == "civetweb" ]; then

@@ -38,6 +38,8 @@ pre code { padding: 1em; display: block; }
 the documentation below.</p>
 ]]
 
+conn:send("<dl><dt>Host environment:</dt><dd>" .. conn.name .. "</dd></dl>")
+
 conn:send(markdown(io.open 'README.md':read '*a'))
 
 conn:send '</div></body></html>'

@@ -3,12 +3,16 @@
 Moonwalk is a [Swagger][1] server implementation for Lua.
 
 Moonwalk is designed to work under various host environments.
-Currently CGI and the [Mongoose][2] and [Civetweb][3] embedded web
-servers are supported, and support can easily be added for others. 
+Currently Moonwalk supports [CGI][2], [Mongoose][3], [Civetweb][4], and
+[LuaNode][5], and contains a built-in server using [LuaSocket][6].
+Support can easily be added for other host environments. 
 
 [1]: http://developers.helloreverb.com/swagger/
-[2]: https://github.com/cesanta/mongoose
-[3]: https://github.com/sunsetbrew/civetweb
+[2]: http://www.ietf.org/rfc/rfc3875
+[3]: https://github.com/cesanta/mongoose
+[4]: https://github.com/sunsetbrew/civetweb
+[5]: https://github.com/ignacio/luanode
+[6]: http://luasocket.luaforge.net
 
 ## Installing Moonwalk ##
 
@@ -65,10 +69,10 @@ Instead of comments, the following construct is used to create a doc block:
 *   The concatenation operator, `..` 
 *   A function definition (the "operation").
 
-For some background on this technique, see the [DecoratorsAndDocstrings][4]
+For some background on this technique, see the [DecoratorsAndDocstrings][7]
 page in the Lua users wiki.
 
-[4]: http://lua-users.org/wiki/DecoratorsAndDocstrings
+[7]: http://lua-users.org/wiki/DecoratorsAndDocstrings
 
 ### The @path tag ###
 
@@ -129,10 +133,10 @@ punctuation. For example:
 
 In addition to a *data type* and *param type*, the `@param` tag may
 include additional validation annotations within the parentheses following
-the parameter name. Recognized annotations draw from the [JSON Schema][5]
+the parameter name. Recognized annotations draw from the [JSON Schema][8]
 validation specification, in keeping with Swagger.
 
-[5]:http://json-schema.org/latest/json-schema-validation.html
+[8]:http://json-schema.org/latest/json-schema-validation.html
 
 ### Validation for all types ###
 

@@ -1,7 +1,8 @@
 -- Simple LuaNode server
 -- pass in the api_root and port number from the command line
+-- https://github.com/ignacio/luanode
 
-_G.HOST_IS_LUANODE = true
+_G.MOONWALK_NODESERVER_VERSION = 0.1
 
 local api_root = process.argv[1] or '/example/'
 local port = tonumber(process.argv[2]) or 8124
@@ -11,9 +12,7 @@ local url = require "luanode.url"
 local path = require "luanode.path"
 local fs = require "luanode.fs"
 
--- install these with luarocks (recommended, optional)
-local mimetypes = require 'mimetypes'
-local lfs = require 'lfs'
+local drive = require 'moonwalk/drive'
 
 local is_path_set = false
 
@@ -24,50 +23,6 @@ local mime_types = {
   ['.js'] =   "text/javascript",
   ['.png'] =  "image/png",
 }
-package.path = "../?.lua;" .. package.path
-
--- loaded Lua scripts.
-local lua_scripts = {}
-
--- run a Lua script given a filename.
-local function run_script(filename, hostdata)
-  local script = lua_scripts[filename]
-  if not script then
-    script = assert(loadfile(filename))
-    lua_scripts[filename] = script
-  end
-  return script(hostdata)
-end
-
--- determine if path (file or directory) exists
-local path_exists = lfs and function(path)
-  -- use luafilesystem if available.
-  return not not lfs.attributes(path, 'mode')
-end or function(path)
-  -- hack: if we can rename it, it must exist.
-  -- caveat: rename could fail if we have read access but no write access.
-  local _, fail = os.rename(path, path)
-  return not fail
-end
-
--- determine if path is a directory
-local is_directory = lfs and function(path)
-  -- use luafilesystem if available.
-  return lfs.attributes(path, 'mode') == 'directory'
-end or function(path)
-  -- hack: if we can cd into it, it must be a directory.
-  -- caveat: not every OS has a cd command.
-  return os.execute("cd " .. path) == 0
-end
-
--- guess mime type given a filename
-local guess_mime_type = mimetypes and function(filename)
-  -- use mimetypes package if available.
-  return mimetypes.guess(filename)
-end or function(filename)
-  -- use built-in mime type associations.
-  return mime_types[filename:match '.*(%..*)$']
-end
 
 -- redirect request
 local function redirect(response, location)
@@ -93,10 +48,10 @@ http.createServer(function(self, request, response)
     end
   end
 
-  if path_exists(filename) then -- requested path exists
+  if drive.path_exists(filename) then -- requested path exists
 
     -- client requested a directory?
-    if is_directory(filename) then
+    if drive.is_directory(filename) then
       -- make sure path is terminated by a slash,
       -- perform redirect if needed
       if not request.url:match '/$' then
@@ -104,7 +59,7 @@ http.createServer(function(self, request, response)
       end
       -- use index.lua or index.html
       local index = filename .. '/index.lua' 
-      if path_exists(index) then 
+      if drive.path_exists(index) then 
         filename = index
       else
         filename = filename .. '/index.html'
@@ -119,7 +74,7 @@ http.createServer(function(self, request, response)
         self.mw.body = self.mw.body .. data
       end)
       request:on('end', function (self) 
-        run_script(filename, hostdata)
+        drive.run_script(filename, hostdata)
         response:finish()
       end)
       return
@@ -135,7 +90,7 @@ http.createServer(function(self, request, response)
       end
 
       local headers = {}
-      local contentType = guess_mime_type(filename)
+      local contentType = drive.guess_mime_type(filename)
       if contentType then headers["Content-Type"] = contentType end
       response:writeHead(200, headers)
       response:write(file, "binary")
@@ -159,3 +114,4 @@ console.log("Moonwalk LuaNode server started on port "
 process:loop()
 
 console.log 'Server offline.'
+

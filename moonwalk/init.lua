@@ -55,22 +55,40 @@ local Connection = proto {
 }
 
 KNOWN_HOSTS['moonwalk/host/cgi'] = function()
-  return os.getenv 'GATEWAY_INTERFACE'
+  local version = os.getenv 'GATEWAY_INTERFACE'
+  return version
 end
 
 KNOWN_HOSTS['moonwalk/host/mongoose'] = function()
-  return _G.mg and _G.mg.version
+  local version = tonumber(_G.mg and _G.mg.version)
+  if not version then return end
+  -- TODO: in the future we should have better ways to
+  -- tell Mongoose and Civetweb apart.
+  local name = version > 3 and 'Mongoose' or 'Civetweb'
+  return version and name .. ' ' .. version
 end
 
 KNOWN_HOSTS['moonwalk/host/luanode'] = function()
-  return _G.HOST_IS_LUANODE
+  local version = _G.process and _G.process.version
+  local loaded = package.loaded['luanode.http']
+  return version and loaded and 'LuaNode ' .. version
+end
+
+KNOWN_HOSTS['moonwalk/host/socket'] = function()
+  local version = _G.MOONWALK_SOCKETSERVER_VERSION
+  return version and 'Moonwalk SocketServer ' .. version
 end
 
 -- detect supported host environment (cgi, mongoose)
 
 local detect_host = memoize(function()
   for path, fn in pairs(KNOWN_HOSTS) do
-    if fn() then return Connection:extend(require(path)) end
+    local name = fn()
+    if name then 
+      local HostConnection = Connection:extend(require(path))
+      HostConnection.name = name
+      return HostConnection
+    end
   end
   error 'Moonwalk could not detect host environment'
 end)
