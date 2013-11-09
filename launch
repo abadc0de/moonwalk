@@ -25,11 +25,17 @@ if [ "$1" == "build" ]; then
   build
 else
 
-  usage="Usage: $0 <host> [path] [port]
-   - <host> should be 'socket', 'luanode', 'mongoose', or 'civetweb'.
-   - <path> should be the path to your api, like 'example'.
-   - <port> should be the port number to run on, like '80'.
-  "
+  usage="Usage: $0 [host] [path] [port]
+  
+    [host]:  One of 'socket', 'luanode', 'mongoose', or 'civetweb'.
+             Default: socket
+            
+    [path]:  The path to your API root, like 'example'.
+             Default: example
+   
+    [port]:  The port number to run on.
+             Default: 8910
+"
 
   host="$1" # host environment
   path="$2" # path to project

@@ -4,7 +4,7 @@ Moonwalk is a [Swagger][1] server implementation for Lua.
 
 Moonwalk is designed to work under various host environments.
 Currently Moonwalk supports [CGI][2], [Mongoose][3], [Civetweb][4], and
-[LuaNode][5], and contains a built-in server using [LuaSocket][6].
+[LuaNode][5], as well as a built-in testing server, "SocketServer".
 Support can easily be added for other host environments. 
 
 [1]: http://developers.helloreverb.com/swagger/
@@ -16,21 +16,41 @@ Support can easily be added for other host environments.
 
 ## Installing Moonwalk ##
 
-You can install the latest version of Moonwalk with LuaRocks:
+To get started with Moonwalk, you can clone this git repository, which
+includes Moonwalk, the API Explorer, example code, and documentation.
+
+    git clone https://github.com/abadc0de/moonwalk.git
+    luarocks install moonwalk --from=moonwalk/rocks
+
+If you don't need the API Explorer or any examples, you can install Moonwalk
+without cloning the repository:
 
     luarocks install moonwalk --from=http://abadc0de.github.io/moonwalk/rocks
 
-Or, you can clone this repository and move/copy/symlink the inner `moonwalk`
-directory into your Lua package path:
+## Usage ##
 
-    cd ~/my/stuff
-    git clone https://github.com/abadc0de/moonwalk.git
-    cd ~/my/webroot
-    ln -s ~/my/stuff/moonwalk/moonwalk .
+Basic usage looks something like this:
+
+    -- index.lua
+
+    -- 1: Load Moonwalk
+    local api = require 'moonwalk'
+
+    -- 2: Register APIs
+    api.register 'user'
+    api.register 'widget'
+    api.register 'gadget'
     
-Obviously you'll want to replace `~/my/stuff` with the location you want
-to clone the repo to, and `~/my/webroot` with your web root or some
-other location in your Lua package path.
+    -- 3: Handle request
+    api.handle_request(...)
+    
+1.  Require Moonwalk and assign it to a local variable.
+
+2.  Call `.register` once for each documented API module (see below).
+    Use `require`-style paths.
+
+3.  Call `.handle_request(...)`. Make sure to pass the ellipses as
+    shown, or LuaNode and SocketServer won't work.
 
 ## Documenting your API ##
 
