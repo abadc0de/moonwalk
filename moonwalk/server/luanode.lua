@@ -70,10 +70,10 @@ http.createServer(function(self, request, response)
     
     -- client requested a .lua file?
     if filename:match '.lua$' then
-      request.mw.body = ''
+      request.mw.body = {}
       request:on('data', function (self, data)
         if not data then return end
-        self.mw.body = self.mw.body .. data
+        table.insert(self.mw.body, data)
       end)
       request:on('end', function (self) 
         drive.run_script(filename, hostdata)

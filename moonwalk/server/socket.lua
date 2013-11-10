@@ -210,10 +210,10 @@ function SocketServer:mainLoop()
     
   end)
   
-  -- If there was an error, dump it.
+  -- If there was an error, dump it and exit.
   if status and not status:match 'interrupted!$' then
     print('\n' .. status)
-    os.exit(1)
+    os.exit(1, 1)
   end
   
   print('\nSocketServer terminating.')

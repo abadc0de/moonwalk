@@ -46,7 +46,8 @@ end
 
 function HostConnection:receive()
   local request, response = unpack(self.hostdata)
-  local out = request.mw.body
+  if not request.mw.body then return end
+  local out = table.concat(request.mw.body, '')
   
   request.mw.body = nil
   

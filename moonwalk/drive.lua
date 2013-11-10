@@ -74,5 +74,4 @@ return {
   is_directory = is_directory,
   last_modified = last_modified,
   guess_mime_type = guess_mime_type,
-  redirect = redirect,
 }
