@@ -1,4 +1,4 @@
-#! /usr/bin/lua
+#!/usr/bin/env lua
 
 local api = require 'moonwalk/init'
 
@@ -11,7 +11,6 @@ function connection:send_head(status, headers)
 end
 
 api.register 'user'
-
 
 -- api.handle_request(...)
 connection:handle_request()

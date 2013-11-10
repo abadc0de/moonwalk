@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 -- Simple LuaNode server
 -- pass in the api_root and port number from the command line
 -- https://github.com/ignacio/luanode

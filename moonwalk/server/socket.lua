@@ -1,23 +1,20 @@
+#!/usr/bin/env lua
 
 -- inspired by http://lua-users.org/lists/lua-l/2002-04/msg00180.html
 
 _G.MOONWALK_SOCKETSERVER_VERSION = 0.1
 
 local socket = require 'socket'
-local util = require 'moonwalk/util'
 local drive = require 'moonwalk/drive'
-
-local file_root = '.'
-local api_root = arg[1] or '/example/'
-local port = tonumber(arg[2]) or 8910
 
 local tinsert = table.insert
 local tremove = table.remove
 local timeout = .001
 
-
 local SocketServer = {
-  port = port,
+  file_root = '.', 
+  api_root = nil,
+  port = nil,
 }
 
 -- redirect request
@@ -27,10 +24,9 @@ function SocketServer:redirect(client, location)
 end
 
 function SocketServer:run()
-  self._server = socket.bind("localhost", self.port)
-  self._server:settimeout(timeout)
-  self._clients = {}
-  self._sendClients = {}
+  self.server = socket.bind("localhost", self.port)
+  self.server:settimeout(timeout)
+  self.clients = {}
   print("SocketServer running on port "..self.port)
   self:mainLoop()
 end
@@ -53,7 +49,7 @@ local is_path_set = false
 
 function SocketServer:handleRequest(client, request)
 
-  local filename = file_root .. request.path
+  local filename = self.file_root .. request.path
   local server = self
   local response = {
     data = {},
@@ -66,10 +62,10 @@ function SocketServer:handleRequest(client, request)
   }
   local hostdata = { request, response }
 
-  if request.uri:match('^' .. api_root) then
-    filename = file_root .. api_root .. 'index.lua'
+  if request.uri:match('^' .. self.api_root) then
+    filename = self.file_root .. self.api_root .. 'index.lua'
     if not is_path_set then
-      package.path = file_root .. api_root .. "?.lua;" .. package.path
+      package.path = self.file_root .. self.api_root .. "?.lua;" .. package.path
       is_path_set = true
     end
   end
@@ -149,8 +145,8 @@ end
 
 function SocketServer:handleClient(client)
   
-  local request = { headers = {}, api_root = api_root }
-  local data, err = client:receive()
+  local request = { headers = {}, api_root = self.api_root }
+  local data, status, part = client:receive()
   
   if err then
     print('error getting data from client: ' .. err)
@@ -163,9 +159,19 @@ function SocketServer:handleClient(client)
   request.path = request.uri:match '^[^?]+'
   request.query = request.uri:match '?(.+)$'
   
-  for data in function() return client:receive() end do
+  while data ~= '' do
+    data, status, part = client:receive()
     local k, v = data:match '^(.-):%s+(.*)$'
+    if status then print ('error receiving headers: ' .. status) end
     if k and v then request.headers[k] = v end 
+  end
+  
+  local len = tonumber(request.headers['Content-Length'])
+  
+  if len and len > 0 then
+    data, status, part = client:receive(len)
+    if status then print ('error receiving body: ' .. status) end
+    request.data = data
   end
   
   self:handleRequest(client, request)
@@ -173,18 +179,19 @@ function SocketServer:handleClient(client)
 end
 
 function SocketServer:lookForNewClients()
-  local client = self._server:accept()
+  local client = self.server:accept()
   if client then
     client:settimeout(timeout)
-    tinsert(self._clients, client)
+    tinsert(self.clients, client)
   end
 end
 
 function SocketServer:mainLoop()
-  local clients = self._clients
-  while 1 do
+  local clients = self.clients
   
-    xpcall(function()
+  local success, status = pcall(function()
+  
+    while 1 do
     
       self:lookForNewClients()
 
@@ -194,18 +201,31 @@ function SocketServer:mainLoop()
       end
 
       for i, client in ipairs(receivingClients) do
-        SocketServer:handleClient(client, data)
+        SocketServer:handleClient(client)
         client:close()
         tremove(clients, i)
       end
       
-    end, function(err) 
-      print('\nSocketServer offline: ' .. err)
-      os.exit(1)
-    end)
+    end
     
+  end)
+  
+  -- If there was an error, dump it.
+  if status and not status:match 'interrupted!$' then
+    print('\n' .. status)
+    os.exit(1)
   end
+  
+  print('\nSocketServer terminating.')
+  
 end
 
-SocketServer:run()
+if arg and arg[0]:find("socket%.lua$") then
+  SocketServer.api_root = arg[1] or '/example/'
+  SocketServer.port = tonumber(arg[2]) or 8910
+  SocketServer:run()
+else
+  return SocketServer
+end
+
 

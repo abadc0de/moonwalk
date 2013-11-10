@@ -14,7 +14,7 @@ Support can easily be added for other host environments.
 [5]: https://github.com/ignacio/luanode
 [6]: http://luasocket.luaforge.net
 
-## Installing Moonwalk ##
+## Installing ##
 
 To get started with Moonwalk, you can clone this git repository, which
 includes Moonwalk, the API Explorer, example code, and documentation.
@@ -27,9 +27,11 @@ without cloning the repository:
 
     luarocks install moonwalk --from=http://abadc0de.github.io/moonwalk/rocks
 
-## Usage ##
+## Overview ##
 
-Basic usage looks something like this:
+### Index page ###
+
+Your API's index page should something like this:
 
     -- index.lua
 
@@ -52,7 +54,7 @@ Basic usage looks something like this:
 3.  Call `.handle_request(...)`. Make sure to pass the ellipses as
     shown, or LuaNode and SocketServer won't work.
 
-## Documenting your API ##
+### Documenting your API ###
 
 Functions in your API should be decorated with doc blocks.
 Valid tags include `@path`, `@param`, and `@return`.
@@ -106,40 +108,11 @@ path, by enclosing the parameter name in braces. For example:
 
 The `@param` tag may contain additional information, enclosed in
 parentheses, after the parameter name. This can include the
-*data type*, the word "from" followed by the Swagger *param type*,
+**data type**, the word "from" followed by the **param type**,
 optionally separated by punctuation. It may also include punctuation 
 after the parentheses to visually separate the description. For example:
 
     @param id (integer, from path): The ID of the widget to fetch.
-
-Any *data type* name may be used, but built-in type checking is
-only provided for the following:
-
-`integer`, `number`, `string`, `boolean`, `object`, `array`
-
-The *param type* determines how information is sent to the API.
-Valid values are:
-
-`path`, `query`, `body`, `header`, `form`
-
-If the *data type* annotation is present, it **must be listed first**.
-All other parenthesized annotations may be listed in any order.
-Any annotation may be omitted, in which case the default values will be used.
-If all annotations within the parentheses are omitted, the parentheses may
-also be omitted.
-
-The default *data type* is `string`, and the default *param type*
-is determined as follows:
-
-*   If the parameter name appears in curly brackets in the `@path`,
-    the default param type is `path`.
-
-*   If the HTTP method is `POST`, the default param type is `form`.
-
-*   In all other cases, the default param type is `query`.
-
-Other validation annotations may be also used within the parentheses.
-See the "Validation" section below.
 
 ### The @return tag ###
 
@@ -151,10 +124,36 @@ punctuation. For example:
 
 ## Validation ##
 
-In addition to a *data type* and *param type*, the `@param` tag may
+In `@param` and `@return` tags, any **data type** name may be used,
+but built-in type checking is only provided for the following:
+
+`integer`, `number`, `string`, `boolean`, `object`, `array`
+
+In `@param` tags, the **param type** determines how information is
+sent to the API. Valid values are:
+
+`path`, `query`, `body`, `header`, `form`
+
+If the **data type** annotation is present, it *must be listed first*.
+All other parenthesized annotations may be listed in any order.
+Any annotation may be omitted, in which case the default values will be used.
+If all annotations within the parentheses are omitted, the parentheses may
+also be omitted.
+
+The default **data type** is `string`, and the default **param type**
+is determined as follows:
+
+*   If the parameter name appears in curly brackets in the `@path`,
+    the default param type is `path`.
+
+*   If the HTTP method is `POST`, the default param type is `form`.
+
+*   In all other cases, the default param type is `query`.
+
+In addition to a **data type** and **param type**, the `@param` tag may
 include additional validation annotations within the parentheses following
 the parameter name. Recognized annotations draw from the [JSON Schema][8]
-validation specification, in keeping with Swagger.
+validation specification.
 
 [8]:http://json-schema.org/latest/json-schema-validation.html
 
@@ -175,21 +174,21 @@ These validation annotations are available for
 *   **maximum** *(partly implemented)*
 
     Numeric parameters may enforce a maximum value using the
-    annotation syntax `maximum N [exclusive]`, where *N* is 
+    annotation `maximum N [exclusive]`, where *N* is 
     any valid number, optionally followed by `exclusive` to
     indicate that the value must be less than (but not equal to) *N*.
 
 *   **minimum** *(partly implemented)*
 
     Numeric parameters may enforce a minimum value using the
-    annotation syntax `minimum N [exclusive]`, where *N* is 
+    annotation `minimum N [exclusive]`, where *N* is 
     any valid number, optionally followed by `exclusive` to
     indicate that the value must be greater than (but not equal to) *N*.
 
 *   **multipleOf**
 
     Numeric parameters may limit a value to being evenly divisible
-    by a number using the annotation syntax `multipleOf N`,
+    by a number using the annotation `multipleOf N`,
     where *N* is any valid number greater than 0.
 
 ### String validation ###
@@ -199,19 +198,19 @@ These validation annotations are available for`string` parameters.
 *   **maxLength**
 
     String parameters may enforce a maximum length using the
-    annotation syntax `maxLength N`, where *N* is any valid
+    annotation `maxLength N`, where *N* is any valid
     non-negative integer.
 
 *   **minLength**
 
     String parameters may enforce a minimum length using the
-    annotation syntax `minLength N`, where *N* is any valid
+    annotation `minLength N`, where *N* is any valid
     non-negative integer.
     
 *   **pattern** *(not yet implemented)*
 
     String parameters may be checked against a regular expression
-    using the annotation syntax `pattern P`, where *P* is any 
+    using the annotation `pattern P`, where *P* is any 
     valid regular expression, enclosed in backticks.
     
 ### Array validation ###
@@ -221,28 +220,57 @@ These validation annotations are available for `array` parameters.
 *   **maxItems**
 
     Array parameters may enforce a maximum length using the
-    annotation syntax `maxItems N`, where *N* is any valid 
+    annotation `maxItems N`, where *N* is any valid 
     non-negative integer.
     
 *   **minItems**
 
     Array parameters may enforce a minimum length using the
-    annotation syntax `minItems N`, where *N* is any valid 
+    annotation `minItems N`, where *N* is any valid 
     non-negative integer.
     
 *   **uniqueItems**
 
     Array parameters may ensure that every item in the array
     is unique using the `uniqueItems` annotation.
+    
+## Host environments ##
 
-## Apache CGI Setup ##
+Some host environments (SocketServer, LuaNode) use one Lua state
+across multiple requests, while others (CGI, Mongoose, Civetweb)
+handle each request in a separate Lua state. We'll call the first
+category "persistent hosts" and the second "traditional hosts."
 
-CGI may not be optimal for a production environment, but it
-works nicely for development and testing. Use this Apache
-vhost configuration and .htaccess file to get started
-quickly.
+### SocketServer ###
 
-### Example Apache vhost config ###
+Invoke the built-in Lua server like this:
+
+    lua moonwalk/server/socket.lua /example/ 8910
+    
+Where `/example/` is your API root and `8910` is the port to use.
+    
+### LuaNode ###
+
+Experimental support for LuaNode is included. Invoke the server like this:
+
+    /path/to/luanode moonwalk/server/luanode.lua /example/ 8910
+    
+Where `/example/` is your API root and `8910` is the port to use.
+
+### Mongoose/Civetweb ###
+
+Mongoose/Civetweb support is included. Invoke the server like this:
+
+    /path/to/server/binary \
+    -document_root /srv/www/moonwalk/ \
+    -url_rewrite_patterns /example/**=example/index.lp
+
+### Apache CGI Setup ###
+
+Use this Apache vhost configuration and .htaccess file
+as an example.
+
+#### Apache vhost config ####
 
     <VirtualHost *:80>
         ServerName moonwalk.local
@@ -257,40 +285,20 @@ quickly.
         </Directory>
     </VirtualHost>
 
-### Example Apache .htaccess ###
+#### Apache .htaccess ####
 
     RewriteEngine On
     RewriteCond $1 !(^index\.lua)
     RewriteRule ^(.*)$ index.lua/$1 [L]
 
-### CGI troubleshooting ###
+#### CGI troubleshooting ####
 
 *   Make sure the shebang line has the correct path to the Lua executable.
     For example, `#! /usr/bin/lua` may need to become `#! /usr/local/bin/lua`.
   
 *   Make sure any files with the shebang are executable (chmod +x).
 
-## Mongoose/Civetweb setup ##
 
-Mongoose/Civetweb support is currently a bit sketchy. Invoke the server
-something like this to get things working the same as the CGI example.
-
-    /path/to/server/binary \
-    -document_root /srv/www/moonwalk/ \
-    -url_rewrite_patterns /example/**=example/index.lp
-
-There are a few fairly trivial features that could be added to Mongoose
-and Civetweb to allow Moonwalk to better support those environments.
-Some of these things are already being discussed, and will hopefully
-be added in the somewhat near future.
-
-## LuaNode setup ##
-
-Experimental support for LuaNode is included. Invoke the sever like this:
-
-    /path/to/luanode server/luanode.lua /example/ 8910
-    
-Where "/example/" is your API root and "8080" is the port to use.
 
 ## License ##
 

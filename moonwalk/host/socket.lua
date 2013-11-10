@@ -41,8 +41,11 @@ end
 
 function HostConnection:receive()
   local request, response = unpack(self.hostdata)
+  local data = request.data
   
-  return request.client:receive()
+  request.data = nil
+  
+  return data
 end
   
 return HostConnection
