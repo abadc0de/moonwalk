@@ -2,10 +2,18 @@
 
 Moonwalk is a [Swagger][1] server implementation for Lua.
 
+**Warning:** This project is under heavy development. The 
+Moonwalk API is not stable. Moonwalk itself is not stable.
+Don't use this in production (yet).
+
 Moonwalk is designed to work under various host environments.
 Currently Moonwalk supports [CGI][2], [Mongoose][3], [Civetweb][4], and
 [LuaNode][5], as well as a built-in testing server, "SocketServer".
-Support can easily be added for other host environments. 
+Support can easily be added for other host environments.
+
+This document should cover most of what you need to get started.
+For more advanced topics, see the [generated documentation
+](http://abadc0de.github.io/moonwalk/docs).
 
 [1]: http://developers.helloreverb.com/swagger/
 [2]: http://www.ietf.org/rfc/rfc3875
@@ -234,6 +242,48 @@ These validation annotations are available for `array` parameters.
     Array parameters may ensure that every item in the array
     is unique using the `uniqueItems` annotation.
     
+## Models ##
+
+Models are a useful way to document how an object should look.
+Currently no built-in validation is provided for models, but
+some Swagger clients may use this information to provide 
+client side validation or documentation. They also show up
+in the API Explorer.
+
+You can define models like this:
+
+    local api = require "moonwalk"
+
+    api.model "User" {
+      id = {
+        type = "integer",
+        minimum = 1,
+        description = "The user's ID number"
+      },
+      email = {
+        description = "The user's email address"
+      },
+      name = {
+        optional = true,
+        description = "The user's full name"
+      },
+      phone = {
+        type = "integer",
+        optional = true,
+        description = "The user's phone number",
+      },
+    }
+    
+
+This is essentially the `properties` object in a Swagger `models`
+section. You can use the model name as a **data type** in your
+`@param` and `@return` tags, and in other models. You can also use 
+full Swagger-style model definitions. Models defined using the short 
+syntax above will be converted to full definitions by `.model`.
+See Swagger's [Complex Types][9] for more information.
+
+[9]:https://github.com/wordnik/swagger-core/wiki/Datatypes#complex-types
+
 ## Host environments ##
 
 Some host environments (SocketServer, LuaNode) use one Lua state

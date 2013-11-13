@@ -1,9 +1,12 @@
 #!/usr/bin/env lua
 
--- Simple LuaNode server
--- pass in the api_root and port number from the command line
--- https://github.com/ignacio/luanode
-
+--- LuaNode Server
+--
+-- A simple [LuaNode](https://github.com/ignacio/luanode) server.
+--
+-- @usage
+-- luanode moonwalk/server/luanode.lua /example/ 8910
+--
 _G.MOONWALK_NODESERVER_VERSION = 0.1
 
 local api_root = process.argv[1] or '/example/'

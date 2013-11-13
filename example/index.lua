@@ -10,7 +10,8 @@ function connection:send_head(status, headers)
   return send_head(self, status, headers)
 end
 
-api.register 'user'
+api.load 'moonwalk/resources'
+api.load 'user'
 
 -- api.handle_request(...)
 connection:handle_request()

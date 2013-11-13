@@ -20,7 +20,7 @@ api.model "User" {
   },
 }
 
-return api.module "User stuff" {
+return api.class "User stuff" {
   
   delete = api.operation [[
   

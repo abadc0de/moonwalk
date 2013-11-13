@@ -4,15 +4,13 @@ local moonwalk = require 'moonwalk/init'
 local markdown = require 'moonwalk/lib/markdown'
 local conn = moonwalk.get_connection(...)
 
-conn:populate_request_table()
-
 conn:send_head('200 OK', { ['Content-Type'] = 'text/html' })
 
 conn:send [[<!doctype html>
 <html>
 <head><title>Moonwalk</title>
 <style>
-body { font: 14px "Droid Sans", sans-serif; color: #333; margin:0; padding: 0;
+body { font: 13px "Droid Sans", sans-serif; color: #333; margin:0; padding: 0;
   line-height: 150%; }
 #header { background: black; height: 100px; color: #ccc; z-index: 1; 
   box-shadow: 0 0 4px black; line-height: 48px; width: 100%;

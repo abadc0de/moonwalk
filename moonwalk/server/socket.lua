@@ -1,6 +1,13 @@
 #!/usr/bin/env lua
 
--- inspired by http://lua-users.org/lists/lua-l/2002-04/msg00180.html
+--- Moonwalk SocketServer
+--
+-- A simple server inspired by
+-- [this post](http://lua-users.org/lists/lua-l/2002-04/msg00180.html).
+--
+-- @usage
+-- lua moonwalk/server/socket.lua /example/ 8910
+--
 
 _G.MOONWALK_SOCKETSERVER_VERSION = 0.1
 

@@ -1,5 +1,7 @@
 #!/bin/bash
-  
+
+# Launch a server. Also builds rocks and docs.
+
 build() {
 
   package="moonwalk"
@@ -19,6 +21,9 @@ build() {
 </head><body>
 <code>Redirecting to <a href='$source_url'>$source_url</a></code>
 </body></html>" > rocks/$package/index.html
+
+   rm -rf docs/*; ldoc .
+
 }
 
 if [ "$1" == "build" ]; then
