@@ -18,23 +18,30 @@ Support can easily be added for other host environments.]],
 dependencies = { "lua >= 5.1" }
 build = {
    type = "builtin",
+   -- TODO: generate this damn thing
    modules = {
       ["moonwalk"] = "init.lua",
-      ["moonwalk.init"] = "init.lua",
-      
       ["moonwalk.config"] = "config.lua",
+      ["moonwalk.connection"] = "connection.lua",
+      ["moonwalk.connection.abstract"] = "connection/abstract.lua",
+      ["moonwalk.connection.cgi"] = "connection/cgi.lua",
+      ["moonwalk.connection.luanode"] = "connection/luanode.lua",
+      ["moonwalk.connection.mongoose"] = "connection/mongoose.lua",
+      ["moonwalk.connection.socket"] = "connection/socket.lua",
       ["moonwalk.drive"] = "drive.lua",
-      ["moonwalk.proto"] = "proto.lua",
-      ["moonwalk.util"] = "util.lua",
-      
-      ["moonwalk.host.cgi"] = "host/cgi.lua",
-      ["moonwalk.host.luanode"] = "host/luanode.lua",
-      ["moonwalk.host.mongoose"] = "host/mongoose.lua",
-      
+      ["moonwalk.facade"] = "facade.lua",
+      ["moonwalk.init"] = "init.lua",
       ["moonwalk.lib.json"] = "lib/json.lua",
       ["moonwalk.lib.markdown"] = "lib/markdown.lua",
       ["moonwalk.lib.memoize"] = "lib/memoize.lua",
-      
+      ["moonwalk.locator"] = "locator.lua",
+      ["moonwalk.parser"] = "parser.lua",
+      ["moonwalk.proto"] = "proto.lua",
+      ["moonwalk.resources"] = "resources.lua",
       ["moonwalk.server.luanode"] = "server/luanode.lua",
+      ["moonwalk.server.socket"] = "server/socket.lua",
+      ["moonwalk.static"] = "static.lua",
+      ["moonwalk.util"] = "util.lua",
+      ["moonwalk.validator"] = "validator.lua",
    }
 }
