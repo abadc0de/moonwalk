@@ -1,8 +1,9 @@
 #!/usr/bin/env lua
 
-local api = require 'moonwalk/init'
+local API = require 'moonwalk/api'
+local api = API(1)
 
-local connection = api.get_connection(...)
+local connection = api:get_connection(...)
 local send_head = connection.send_head
 
 function connection:send_head(status, headers) 
@@ -10,8 +11,8 @@ function connection:send_head(status, headers)
   return send_head(self, status, headers)
 end
 
-api.load 'moonwalk/resources'
-api.load 'user'
+api:load_class 'moonwalk/resources'
+api:load_class 'user'
 
 -- api.handle_request(...)
 connection:handle_request()

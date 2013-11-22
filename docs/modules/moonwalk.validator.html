@@ -38,21 +38,25 @@
 
 
 <h2>Modules</h2>
-<ul>
-  <li><a href="../modules/moonwalk.html">moonwalk</a></li>
-  <li><a href="../modules/moonwalk.config.html">moonwalk.config</a></li>
-  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
-  <li><a href="../modules/moonwalk.locator.html">moonwalk.locator</a></li>
-  <li><a href="../modules/moonwalk.parser.html">moonwalk.parser</a></li>
-  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
-  <li><a href="../modules/moonwalk.static.html">moonwalk.static</a></li>
-  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
-  <li><strong>moonwalk.validator</strong></li>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../modules/moonwalk.api.html">api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">util</a></li>
+  <li><strong>validator</strong></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -60,7 +64,6 @@
 <div id="content">
 
 <h1>Module <code>moonwalk.validator</code></h1>
-
 <p>Type conversion and validation</p>
 <p>
 
@@ -70,22 +73,22 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#failure">failure&nbsp;(reason, status)</a></td>
+	<td class="name" nowrap><a href="#failure">failure (reason, status)</a></td>
 	<td class="summary">Creates an object representing failure.</td>
 	</tr>
 </table>
 <h2><a href="#Validation_functions">Validation functions </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#check_object">check_object&nbsp;(value, info)</a></td>
+	<td class="name" nowrap><a href="#check_object">check_object (value, info)</a></td>
 	<td class="summary">Validate a string containing a JSON object or array.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#check_string">check_string&nbsp;(value, info)</a></td>
+	<td class="name" nowrap><a href="#check_string">check_string (value, info)</a></td>
 	<td class="summary">Validate a string.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#check_number">check_number&nbsp;(value, info)</a></td>
+	<td class="name" nowrap><a href="#check_number">check_number (value, info)</a></td>
 	<td class="summary">Validate a number.</td>
 	</tr>
 </table>
@@ -98,7 +101,7 @@
     <dl class="function">
     <dt>
     <a name = "failure"></a>
-    <strong>failure&nbsp;(reason, status)</strong>
+    <strong>failure (reason, status)</strong>
     </dt>
     <dd>
     Creates an object representing failure.
@@ -106,9 +109,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">reason</span>
-         Human-readable reason why the request failed.</li>
+         Human-readable reason why the request failed.
+        </li>
         <li><span class="parameter">status</span>
-         Optional HTTP status code and reason, like <code>400 Bad Request</code></li>
+         Optional HTTP status code and reason, like <code>400 Bad Request</code>
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -124,14 +129,14 @@
 </dd>
 </dl>
     <h2><a name="Validation_functions"></a>Validation functions </h2>
-        Validation functions.  For each of these functions, <code>value</code> is a
+          For each of these functions, <code>value</code> is a
  string passed in by the API consumer containing JSON data. The
  <code>info</code> argument should be a table of parameter or property
  validation rules extracted from a doc block or model definition.
     <dl class="function">
     <dt>
     <a name = "check_object"></a>
-    <strong>check_object&nbsp;(value, info)</strong>
+    <strong>check_object (value, info)</strong>
     </dt>
     <dd>
     Validate a string containing a JSON object or array.
@@ -139,9 +144,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">value</span>
-         String value to check.</li>
+         String value to check.
+        </li>
         <li><span class="parameter">info</span>
-         Validation info.</li>
+         Validation info.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -158,7 +165,7 @@
 </dd>
     <dt>
     <a name = "check_string"></a>
-    <strong>check_string&nbsp;(value, info)</strong>
+    <strong>check_string (value, info)</strong>
     </dt>
     <dd>
     Validate a string.
@@ -166,9 +173,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">value</span>
-         String value to check.</li>
+         String value to check.
+        </li>
         <li><span class="parameter">info</span>
-         Validation info.</li>
+         Validation info.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -185,7 +194,7 @@
 </dd>
     <dt>
     <a name = "check_number"></a>
-    <strong>check_number&nbsp;(value, info)</strong>
+    <strong>check_number (value, info)</strong>
     </dt>
     <dd>
     Validate a number.
@@ -193,9 +202,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">value</span>
-         String value to check.</li>
+         String value to check.
+        </li>
         <li><span class="parameter">info</span>
-         Validation info.</li>
+         Validation info.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -216,7 +227,7 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3.12</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

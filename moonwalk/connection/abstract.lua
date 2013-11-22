@@ -2,7 +2,7 @@
 --
 -- To add support for a new host environment, create a
 -- class module with methods matching those listed here,
--- and insert it into `static.connection_classes`.
+-- and insert the module path into `api.connection_modules`.
 -- Moonwalk will call `connection:detect_host` on 
 -- each module in that table. The first one to return a 
 -- truthy value will be used as a base class for the `connection`.

@@ -5,11 +5,9 @@
 -- the Resource Listing (so it won't appear in the API Explorer or
 -- generated client code).
 
-local config = require 'moonwalk/config'
-local api = require 'moonwalk/facade'
-local parser = require 'moonwalk/parser'
-local static = require 'moonwalk/static'
+local api = require 'moonwalk/api'
 local util = require 'moonwalk/util'
+local memoize = require 'moonwalk/lib/memoize'
 
 local resource_list_path = 'resources/'
 
@@ -25,21 +23,22 @@ local function get_base_path(connection)
   return scheme .. '://' .. host .. path
 end
 
-local get_resource_listing = function()
+local create_resource_listing = memoize(function(api)
   return {
-    apiVersion = config.api_version,
-    swaggerVersion = config.swagger_version,
-    apis = static.api_info, -- process_api_info(),
+    apiVersion = api.version,
+    swaggerVersion = api.swagger_version,
+    apis = api.info, -- process_api_info(),
   }
-end
+end)
 
-local get_api_declaration = function(connection)
+local create_api_declaration = memoize(function(api, base, path)
   
-  local base = get_base_path(connection)
-  local path = util.trim_path(connection.request.path)
+  -- local api = connection.api
+  -- local base = get_base_path(connection)
+  -- local path = util.trim_path(connection.request.path)
   local resource_path = path:gsub('^' .. resource_list_path, '')
   
-  local class = static.api_classes[resource_path]
+  local class = api.classes[resource_path]
   
   if not class then
     return nil, 'Resource does not exist', '404 Not Found'
@@ -47,44 +46,44 @@ local get_api_declaration = function(connection)
 
   local ops_by_path = {}
   local declaration = {
-    apiVersion = config.api_version,
-    swaggerVersion = config.swagger_version,
+    apiVersion = api.version,
+    swaggerVersion = api.swagger_version,
     basePath = base,
     resourcePath = '/' .. resource_list_path .. util.trim_path(resource_path),
     apis = {},
     models = {},
   }
   
-  local path, info, models
-  
-  for key, value in pairs(class) do 
-    path, info, models = parser.parse_doc(key, value)
-    if path and info then
-      if not ops_by_path[path] then ops_by_path[path] = {} end
-      table.insert(ops_by_path[path], info)
-      for key, value in pairs(models) do 
-        declaration.models[key] = value
+  for key, op in pairs(class.operations) do 
+    if type(op) == 'table' and op.decode_docblock then
+      local path, info, models = op:decode_docblock(key, api)
+      if path and info then
+        if not ops_by_path[path] then ops_by_path[path] = {} end
+        table.insert(ops_by_path[path], info)
+        for k, v in pairs(models) do 
+          declaration.models[k] = v
+        end
       end
     end
   end
   
-  for key, value in pairs(ops_by_path) do 
+  for key, ops in pairs(ops_by_path) do 
     table.insert(declaration.apis, {
       path = key, 
-      operations = value,
-      description = static.class_titles[class],
+      operations = ops,
+      description = class.title,
     })
   end
 
   return declaration
-end
+end)
 
 --- Operations. Each function is an API `operation`.
 --
 -- @section operations
 --
 
-return api.class "Swagger resources" {
+return api.class("Swagger resources",{
 
   hide_api_info = true,
 
@@ -98,14 +97,16 @@ return api.class "Swagger resources" {
   --
   -- @class function
   -- @name get_api_declaration
-  get_api_declaration = api.operation [[
+  get_api_declaration = api.operation([[
     @path GET /resources/{name}/
     @param name: The name of the API class.
-  ]] .. function(name, connection)
-  
-    return get_api_declaration(connection)
+  ]], function(name, connection)
+    local api = connection.api
+    local base = get_base_path(connection)
+    local path = util.trim_path(connection.request.path)
     
-  end,
+    return create_api_declaration(api, base, path)
+  end),
 
   --- Get a Swagger [Resource Listing
   -- ](https://github.com/wordnik/swagger-core/wiki/Resource-Listing).
@@ -115,12 +116,12 @@ return api.class "Swagger resources" {
   --
   -- @class function
   -- @name get_resource_listing
-  get_resource_listing = api.operation [[
+  get_resource_listing = api.operation([[
     @path GET /resources/
-  ]] .. function(name)
+  ]], function(connection)
+    local api = connection.api
   
-    return get_resource_listing()
-  
-  end,
+    return create_resource_listing(api)
+  end),
 
-}
+})

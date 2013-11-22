@@ -37,21 +37,25 @@
 
 
 <h2>Modules</h2>
-<ul>
-  <li><a href="../modules/moonwalk.html">moonwalk</a></li>
-  <li><a href="../modules/moonwalk.config.html">moonwalk.config</a></li>
-  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
-  <li><strong>moonwalk.drive</strong></li>
-  <li><a href="../modules/moonwalk.locator.html">moonwalk.locator</a></li>
-  <li><a href="../modules/moonwalk.parser.html">moonwalk.parser</a></li>
-  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
-  <li><a href="../modules/moonwalk.static.html">moonwalk.static</a></li>
-  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../modules/moonwalk.api.html">api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
+  <li><strong>drive</strong></li>
+  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -59,33 +63,32 @@
 <div id="content">
 
 <h1>Module <code>moonwalk.drive</code></h1>
-
 <p>Filesystem utilities.</p>
 <p> Used by the standalone servers <a href="../modules/moonwalk.server.socket.html">server.socket</a>  and <a href="../modules/moonwalk.server.luanode.html">server.luanode</a> .
- Might also be useful within an <a href="../modules/moonwalk.html#operation">operation</a> . The <code>mimetypes</code> and <code>lfs</code>
+ Might also be useful within an <code>operation</code>. The <code>mimetypes</code> and <a href="http://stevedonovan.github.io/lua-stdlibs/modules/lfs.html">lfs</a>
  modules are highly recommended, although this may work without them.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#guess_mime_type">guess_mime_type&nbsp;(path)</a></td>
+	<td class="name" nowrap><a href="#guess_mime_type">guess_mime_type (path)</a></td>
 	<td class="summary">Guess a file's MIME type.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#is_directory">is_directory&nbsp;(path)</a></td>
+	<td class="name" nowrap><a href="#is_directory">is_directory (path)</a></td>
 	<td class="summary">Determine if path is a directory.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#last_modified">last_modified&nbsp;(path)</a></td>
+	<td class="name" nowrap><a href="#last_modified">last_modified (path)</a></td>
 	<td class="summary">Get file's last modified date.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#path_exists">path_exists&nbsp;(path)</a></td>
+	<td class="name" nowrap><a href="#path_exists">path_exists (path)</a></td>
 	<td class="summary">Determine if path (file or directory) exists.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#run_script">run_script&nbsp;(path, hostdata)</a></td>
+	<td class="name" nowrap><a href="#run_script">run_script (path, hostdata)</a></td>
 	<td class="summary">Run a Lua script given a filename.</td>
 	</tr>
 </table>
@@ -98,7 +101,7 @@
     <dl class="function">
     <dt>
     <a name = "guess_mime_type"></a>
-    <strong>guess_mime_type&nbsp;(path)</strong>
+    <strong>guess_mime_type (path)</strong>
     </dt>
     <dd>
     Guess a file's MIME type.
@@ -106,7 +109,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Absolute or relative file path.</li>
+         Absolute or relative file path.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -121,7 +125,7 @@
 </dd>
     <dt>
     <a name = "is_directory"></a>
-    <strong>is_directory&nbsp;(path)</strong>
+    <strong>is_directory (path)</strong>
     </dt>
     <dd>
     Determine if path is a directory.
@@ -129,7 +133,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Absolute or relative file path.</li>
+         Absolute or relative file path.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -144,7 +149,7 @@
 </dd>
     <dt>
     <a name = "last_modified"></a>
-    <strong>last_modified&nbsp;(path)</strong>
+    <strong>last_modified (path)</strong>
     </dt>
     <dd>
     Get file's last modified date.
@@ -152,7 +157,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Absolute or relative file path.</li>
+         Absolute or relative file path.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -168,7 +174,7 @@
 </dd>
     <dt>
     <a name = "path_exists"></a>
-    <strong>path_exists&nbsp;(path)</strong>
+    <strong>path_exists (path)</strong>
     </dt>
     <dd>
     Determine if path (file or directory) exists.
@@ -176,7 +182,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Absolute or relative file path.</li>
+         Absolute or relative file path.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -192,7 +199,7 @@
 </dd>
     <dt>
     <a name = "run_script"></a>
-    <strong>run_script&nbsp;(path, hostdata)</strong>
+    <strong>run_script (path, hostdata)</strong>
     </dt>
     <dd>
     Run a Lua script given a filename. </p>
@@ -203,9 +210,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Absolute or relative file path.</li>
+         Absolute or relative file path.
+        </li>
         <li><span class="parameter">hostdata</span>
-         Data the host can use later, sent through varargs.</li>
+         Data the host can use later, sent through varargs.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -224,7 +233,7 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3.12</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -37,21 +37,25 @@
 
 
 <h2>Modules</h2>
-<ul>
-  <li><a href="../modules/moonwalk.html">moonwalk</a></li>
-  <li><a href="../modules/moonwalk.config.html">moonwalk.config</a></li>
-  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
-  <li><a href="../modules/moonwalk.locator.html">moonwalk.locator</a></li>
-  <li><a href="../modules/moonwalk.parser.html">moonwalk.parser</a></li>
-  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
-  <li><a href="../modules/moonwalk.static.html">moonwalk.static</a></li>
-  <li><strong>moonwalk.util</strong></li>
-  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../modules/moonwalk.api.html">api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
+  <li><strong>util</strong></li>
+  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -59,7 +63,6 @@
 <div id="content">
 
 <h1>Module <code>moonwalk.util</code></h1>
-
 <p>Text processing utilities.</p>
 <p>
 
@@ -69,39 +72,39 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#dump">dump&nbsp;(...)</a></td>
+	<td class="name" nowrap><a href="#dump">dump (...)</a></td>
 	<td class="summary">Print anything, including nested tables.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#trim_path">trim_path&nbsp;(path)</a></td>
+	<td class="name" nowrap><a href="#trim_path">trim_path (path)</a></td>
 	<td class="summary">Trim leading and trailing slashes from a path.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#normalize_path">normalize_path&nbsp;(path)</a></td>
+	<td class="name" nowrap><a href="#normalize_path">normalize_path (path)</a></td>
 	<td class="summary">Make path have exactly one leading and one trailing slash.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#json_encode">json_encode&nbsp;(data)</a></td>
+	<td class="name" nowrap><a href="#json_encode">json_encode (data)</a></td>
 	<td class="summary">Encode JSON.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#json_decode">json_decode&nbsp;(text)</a></td>
+	<td class="name" nowrap><a href="#json_decode">json_decode (text)</a></td>
 	<td class="summary">Decode JSON.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#uri_encode">uri_encode&nbsp;(text)</a></td>
+	<td class="name" nowrap><a href="#uri_encode">uri_encode (text)</a></td>
 	<td class="summary">Encode URI component.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#uri_decode">uri_decode&nbsp;(text)</a></td>
+	<td class="name" nowrap><a href="#uri_decode">uri_decode (text)</a></td>
 	<td class="summary">Decode URI component.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#query_encode">query_encode&nbsp;(data)</a></td>
+	<td class="name" nowrap><a href="#query_encode">query_encode (data)</a></td>
 	<td class="summary">Encode a table as a query string.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#query_decode">query_decode&nbsp;(text)</a></td>
+	<td class="name" nowrap><a href="#query_decode">query_decode (text)</a></td>
 	<td class="summary">Decode a query string into a table.</td>
 	</tr>
 </table>
@@ -114,7 +117,7 @@
     <dl class="function">
     <dt>
     <a name = "dump"></a>
-    <strong>dump&nbsp;(...)</strong>
+    <strong>dump (...)</strong>
     </dt>
     <dd>
     Print anything, including nested tables. </p>
@@ -126,7 +129,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">...</span>
-         Anything</li>
+         Anything
+        </li>
     </ul>
 
 
@@ -136,7 +140,7 @@
 </dd>
     <dt>
     <a name = "trim_path"></a>
-    <strong>trim_path&nbsp;(path)</strong>
+    <strong>trim_path (path)</strong>
     </dt>
     <dd>
     Trim leading and trailing slashes from a path.
@@ -144,7 +148,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Path</li>
+         Path
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -154,7 +159,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#normalize_path">normalize_path</a>
     </ul>
@@ -163,7 +168,7 @@
 </dd>
     <dt>
     <a name = "normalize_path"></a>
-    <strong>normalize_path&nbsp;(path)</strong>
+    <strong>normalize_path (path)</strong>
     </dt>
     <dd>
     Make path have exactly one leading and one trailing slash.
@@ -171,7 +176,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         Path</li>
+         Path
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -181,7 +187,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#trim_path">trim_path</a>
     </ul>
@@ -190,7 +196,7 @@
 </dd>
     <dt>
     <a name = "json_encode"></a>
-    <strong>json_encode&nbsp;(data)</strong>
+    <strong>json_encode (data)</strong>
     </dt>
     <dd>
     Encode JSON.
@@ -198,7 +204,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">data</span>
-         Lua value to encode</li>
+         Lua value to encode
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -208,7 +215,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#json_decode">json_decode</a>
     </ul>
@@ -217,7 +224,7 @@
 </dd>
     <dt>
     <a name = "json_decode"></a>
-    <strong>json_decode&nbsp;(text)</strong>
+    <strong>json_decode (text)</strong>
     </dt>
     <dd>
     Decode JSON.
@@ -225,7 +232,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">text</span>
-         JSON string</li>
+         JSON string
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -235,7 +243,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#json_encode">json_encode</a>
     </ul>
@@ -244,7 +252,7 @@
 </dd>
     <dt>
     <a name = "uri_encode"></a>
-    <strong>uri_encode&nbsp;(text)</strong>
+    <strong>uri_encode (text)</strong>
     </dt>
     <dd>
     Encode URI component. </p>
@@ -255,7 +263,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">text</span>
-         Plain text string</li>
+         Plain text string
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -265,7 +274,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#uri_decode">uri_decode</a>
     </ul>
@@ -274,7 +283,7 @@
 </dd>
     <dt>
     <a name = "uri_decode"></a>
-    <strong>uri_decode&nbsp;(text)</strong>
+    <strong>uri_decode (text)</strong>
     </dt>
     <dd>
     Decode URI component.
@@ -282,7 +291,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">text</span>
-         URI-encoded text</li>
+         URI-encoded text
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -292,7 +302,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#uri_encode">uri_encode</a>
     </ul>
@@ -301,7 +311,7 @@
 </dd>
     <dt>
     <a name = "query_encode"></a>
-    <strong>query_encode&nbsp;(data)</strong>
+    <strong>query_encode (data)</strong>
     </dt>
     <dd>
     Encode a table as a query string. </p>
@@ -312,7 +322,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">data</span>
-         Table of key-value pairs</li>
+         Table of key-value pairs
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -322,7 +333,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#query_decode">query_decode</a>
     </ul>
@@ -331,7 +342,7 @@
 </dd>
     <dt>
     <a name = "query_decode"></a>
-    <strong>query_decode&nbsp;(text)</strong>
+    <strong>query_decode (text)</strong>
     </dt>
     <dd>
     Decode a query string into a table.
@@ -339,7 +350,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">text</span>
-         Query string</li>
+         Query string
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -349,7 +361,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.util.html#query_encode">query_encode</a>
     </ul>
@@ -362,7 +374,7 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3.12</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

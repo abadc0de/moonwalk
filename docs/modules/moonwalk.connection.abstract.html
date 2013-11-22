@@ -38,21 +38,25 @@
 
 
 <h2>Modules</h2>
-<ul>
-  <li><a href="../modules/moonwalk.html">moonwalk</a></li>
-  <li><a href="../modules/moonwalk.config.html">moonwalk.config</a></li>
-  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
-  <li><strong>moonwalk.connection.abstract</strong></li>
-  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
-  <li><a href="../modules/moonwalk.locator.html">moonwalk.locator</a></li>
-  <li><a href="../modules/moonwalk.parser.html">moonwalk.parser</a></li>
-  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
-  <li><a href="../modules/moonwalk.static.html">moonwalk.static</a></li>
-  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../modules/moonwalk.api.html">api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
+  <li><strong>connection.abstract</strong></li>
+  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -60,11 +64,10 @@
 <div id="content">
 
 <h1>Module <code>moonwalk.connection.abstract</code></h1>
-
 <p>Abstract connection.</p>
 <p> To add support for a new host environment, create a
  class module with methods matching those listed here,
- and insert it into <a href="../modules/moonwalk.static.html#connection_classes">static.connection_classes</a> .
+ and insert the module path into <a href="../modules/moonwalk.api.html#connection_modules">api.connection_modules</a> .
  Moonwalk will call <a href="../modules/moonwalk.connection.abstract.html#connection:detect_host">connection:detect_host</a>  on
  each module in that table. The first one to return a
  truthy value will be used as a base class for the <a href="../modules/moonwalk.connection.html">connection</a> .</p>
@@ -73,46 +76,46 @@
 <h2><a href="#Static_methods">Static methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#connection:detect_host">connection:detect_host&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:detect_host">connection:detect_host ()</a></td>
 	<td class="summary">Detect the host environment.</td>
 	</tr>
 </table>
 <h2><a href="#Instance_methods">Instance methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#connection:get_method">connection:get_method&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:get_method">connection:get_method ()</a></td>
 	<td class="summary">Get the request method.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:get_path">connection:get_path&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:get_path">connection:get_path ()</a></td>
 	<td class="summary">Get the path info.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:get_scheme">connection:get_scheme&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:get_scheme">connection:get_scheme ()</a></td>
 	<td class="summary">Get the URI scheme.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:get_script">connection:get_script&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:get_script">connection:get_script ()</a></td>
 	<td class="summary">Get the script's name.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:get_query">connection:get_query&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:get_query">connection:get_query ()</a></td>
 	<td class="summary">Get the query string.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:get_header">connection:get_header&nbsp;(name)</a></td>
+	<td class="name" nowrap><a href="#connection:get_header">connection:get_header (name)</a></td>
 	<td class="summary">Get the value of an HTTP header.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:send">connection:send&nbsp;(data)</a></td>
+	<td class="name" nowrap><a href="#connection:send">connection:send (data)</a></td>
 	<td class="summary">Send the response body.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:send_head">connection:send_head&nbsp;(status, headers)</a></td>
+	<td class="name" nowrap><a href="#connection:send_head">connection:send_head (status, headers)</a></td>
 	<td class="summary">Send the response head.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#connection:receive">connection:receive&nbsp;()</a></td>
+	<td class="name" nowrap><a href="#connection:receive">connection:receive ()</a></td>
 	<td class="summary">Receive the request body.</td>
 	</tr>
 </table>
@@ -122,12 +125,12 @@
 
 
     <h2><a name="Static_methods"></a>Static methods </h2>
-        Static methods.  Called on a "connection class,"
+          Called on a "connection class,"
  rather than an instance of one.
     <dl class="function">
     <dt>
     <a name = "connection:detect_host"></a>
-    <strong>connection:detect_host&nbsp;()</strong>
+    <strong>connection:detect_host ()</strong>
     </dt>
     <dd>
     Detect the host environment.  This function should check whether
@@ -148,11 +151,11 @@
 </dd>
 </dl>
     <h2><a name="Instance_methods"></a>Instance methods </h2>
-        Instance methods.  Called on a connection instance.
+          Called on a connection instance.
     <dl class="function">
     <dt>
     <a name = "connection:get_method"></a>
-    <strong>connection:get_method&nbsp;()</strong>
+    <strong>connection:get_method ()</strong>
     </dt>
     <dd>
     Get the request method.  Equivalent to CGI's
@@ -166,7 +169,7 @@
 </dd>
     <dt>
     <a name = "connection:get_path"></a>
-    <strong>connection:get_path&nbsp;()</strong>
+    <strong>connection:get_path ()</strong>
     </dt>
     <dd>
     Get the path info.  Equivalent to CGI's
@@ -190,7 +193,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.connection.abstract.html#connection:get_script">connection:get_script</a>
     </ul>
@@ -199,7 +202,7 @@
 </dd>
     <dt>
     <a name = "connection:get_scheme"></a>
-    <strong>connection:get_scheme&nbsp;()</strong>
+    <strong>connection:get_scheme ()</strong>
     </dt>
     <dd>
     Get the URI scheme.
@@ -217,7 +220,7 @@
 </dd>
     <dt>
     <a name = "connection:get_script"></a>
-    <strong>connection:get_script&nbsp;()</strong>
+    <strong>connection:get_script ()</strong>
     </dt>
     <dd>
     Get the script's name.  Equivalent to CGI's
@@ -238,7 +241,7 @@
     </ol>
 
 
-    <h3>see also:</h3>
+    <h3>See also:</h3>
     <ul>
          <a href="../modules/moonwalk.connection.abstract.html#connection:get_path">connection:get_path</a>
     </ul>
@@ -247,7 +250,7 @@
 </dd>
     <dt>
     <a name = "connection:get_query"></a>
-    <strong>connection:get_query&nbsp;()</strong>
+    <strong>connection:get_query ()</strong>
     </dt>
     <dd>
     Get the query string.  Equivalent to CGI's
@@ -266,7 +269,7 @@
 </dd>
     <dt>
     <a name = "connection:get_header"></a>
-    <strong>connection:get_header&nbsp;(name)</strong>
+    <strong>connection:get_header (name)</strong>
     </dt>
     <dd>
     Get the value of an HTTP header.
@@ -274,7 +277,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-         The name of the header.</li>
+         The name of the header.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -289,7 +293,7 @@
 </dd>
     <dt>
     <a name = "connection:send"></a>
-    <strong>connection:send&nbsp;(data)</strong>
+    <strong>connection:send (data)</strong>
     </dt>
     <dd>
     Send the response body. </p>
@@ -301,7 +305,8 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">data</span>
-         A string containing (part of) the request body.</li>
+         A string containing (part of) the request body.
+        </li>
     </ul>
 
 
@@ -311,7 +316,7 @@
 </dd>
     <dt>
     <a name = "connection:send_head"></a>
-    <strong>connection:send_head&nbsp;(status, headers)</strong>
+    <strong>connection:send_head (status, headers)</strong>
     </dt>
     <dd>
     Send the response head. </p>
@@ -322,9 +327,11 @@
     <ul>
         <li><span class="parameter">status</span>
          A string containing the HTTP status code and reason,
- like <code>500 Internal Server Error</code>.</li>
+ like <code>500 Internal Server Error</code>.
+        </li>
         <li><span class="parameter">headers</span>
-         A table of header names and values.</li>
+         A table of header names and values.
+        </li>
     </ul>
 
 
@@ -334,7 +341,7 @@
 </dd>
     <dt>
     <a name = "connection:receive"></a>
-    <strong>connection:receive&nbsp;()</strong>
+    <strong>connection:receive ()</strong>
     </dt>
     <dd>
     Receive the request body. </p>
@@ -361,7 +368,7 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3.12</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

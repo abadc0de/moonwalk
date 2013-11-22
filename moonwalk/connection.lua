@@ -1,12 +1,11 @@
 --- Connection between host and client. 
--- Extends a base connection implementing the interface described in
--- `moonwalk.connection.abstract`. 
+-- Extends a base object implementing the interface described in
+-- `connection.abstract`. 
 --
--- The base connection is determined at run time. It could be a built-in
+-- The base object is determined at run time. It could be a built-in
 -- connection type, or a new type defined by the API author.
 --
 --
-local locator = require 'moonwalk/locator'
 local util = require 'moonwalk/util'
 
 --- @type module
@@ -79,10 +78,11 @@ end
 --- Handle the request.
 --
 function connection:handle_request()
+  local api = self.api
   local request = self.request
   local path = util.trim_path(request.path)
   local result, op_err, op_status
-  local fn, args, failure = locator.find_operation(self)
+  local fn, args, failure = api.operation:prepare(self)
   
   if failure then return failure.fail(self) end
   if fn and args then

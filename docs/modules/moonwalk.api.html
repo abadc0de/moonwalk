@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Moonwalk API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Moonwalk API</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#API_definition_classes">API definition classes </a></li>
+<li><a href="#Configuration_fields">Configuration fields </a></li>
+<li><a href="#Request_handling_functions">Request handling functions </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>api</strong></li>
+  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>moonwalk.api</code></h1>
+<p>Moonwalk core module.</p>
+<p>
+ This module should contain everything API authors will need.</p>
+
+
+<h2><a href="#API_definition_classes">API definition classes </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#class">class</a></td>
+	<td class="summary">Instantiate an API class.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#model">model</a></td>
+	<td class="summary">Instantiate an API model.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#operation">operation</a></td>
+	<td class="summary">Instantiate an API operation.</td>
+	</tr>
+</table>
+<h2><a href="#Configuration_fields">Configuration fields </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#connection_modules">connection_modules</a></td>
+	<td class="summary">Connection modules.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#swagger_version">swagger_version</a></td>
+	<td class="summary">Swagger version.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#version">version</a></td>
+	<td class="summary">Your API's version number.</td>
+	</tr>
+</table>
+<h2><a href="#Request_handling_functions">Request handling functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#api:create_connection">api:create_connection ()</a></td>
+	<td class="summary">Create a <a href="../modules/moonwalk.connection.html">connection</a>  base object suitable for the current
+ host environment.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#api:get_connection">api:get_connection (hostdata)</a></td>
+	<td class="summary">Instantiate a new <a href="../modules/moonwalk.connection.html">connection</a>  object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#api:handle_request">api:handle_request (hostdata)</a></td>
+	<td class="summary">handle the request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#api:load_class">api:load_class (path)</a></td>
+	<td class="summary">Load an API class.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="API_definition_classes"></a>API definition classes </h2>
+
+ Each of these class constructors have the following special behavior:
+ If the constructor is called with less than the documented number of
+ arguments, it will return a <em>continuation object</em> that can be called
+ or concatenated with any remaining arguments. This enables docstrings
+ to be appended to operation functions as described in
+ <a href="http://lua-users.org/wiki/DecoratorsAndDocstrings">DecoratorsAndDocstrings</a>,
+ and it allows calling functions with only string and table literal
+ arguments without any parentheses.
+    <dl class="function">
+    <dt>
+    <a name = "class"></a>
+    <strong>class</strong>
+    </dt>
+    <dd>
+    Instantiate an API class.  See <a href="../modules/moonwalk.api.class.html">api.class</a>  constructor.
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "model"></a>
+    <strong>model</strong>
+    </dt>
+    <dd>
+    Instantiate an API model.  See <a href="../modules/moonwalk.api.model.html">api.model</a>  constructor.
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "operation"></a>
+    <strong>operation</strong>
+    </dt>
+    <dd>
+    Instantiate an API operation.  See <a href="../modules/moonwalk.api.operation.html">api.operation</a>  constructor.
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Configuration_fields"></a>Configuration fields </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "connection_modules"></a>
+    <strong>connection_modules</strong>
+    </dt>
+    <dd>
+    Connection modules. </p>
+
+<p> A numeric table containing paths to implementations of
+  <a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a> .
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">moonwalk/connection/cgi</span>
+        CGI support.
+        </li>
+        <li><span class="parameter">moonwalk/connection/luanode</span>
+        Experimental LuaNode support.
+        </li>
+        <li><span class="parameter">moonwalk/connection/mongoose</span>
+        Mongoose and Civetweb support.
+        </li>
+        <li><span class="parameter">moonwalk/connection/socket</span>
+        Support for built-in testing server.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "swagger_version"></a>
+    <strong>swagger_version</strong>
+    </dt>
+    <dd>
+    Swagger version. </p>
+
+<p> The version of the Swagger protocol being used. You probably don't
+ need to change it.</p>
+
+<p> Defaults to <code>'1.2'</code>.
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "version"></a>
+    <strong>version</strong>
+    </dt>
+    <dd>
+    Your API's version number. </p>
+
+<p> Defaults to <code>'1.0'</code>.
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Request_handling_functions"></a>Request handling functions </h2>
+          Call these from your controller.
+ Call <a href="../modules/moonwalk.api.html#api:load_class">api:load_class</a>  once for each <a href="../modules/moonwalk.api.class.html">api.class</a>  module, then call
+ <a href="../modules/moonwalk.api.html#api:handle_request">api:handle_request</a> .
+    <dl class="function">
+    <dt>
+    <a name = "api:create_connection"></a>
+    <strong>api:create_connection ()</strong>
+    </dt>
+    <dd>
+    Create a <a href="../modules/moonwalk.connection.html">connection</a>  base object suitable for the current
+ host environment.
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+         A connection object that will be instantiated once per
+ request.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "api:get_connection"></a>
+    <strong>api:get_connection (hostdata)</strong>
+    </dt>
+    <dd>
+    Instantiate a new <a href="../modules/moonwalk.connection.html">connection</a>  object. </p>
+
+<p> Creates an instance of the base object returned by <a href="../modules/moonwalk.api.html#api:create_connection">api:create_connection</a> .
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">hostdata</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The newly instantiated <a href="../modules/moonwalk.connection.html">connection</a>  object.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "api:handle_request"></a>
+    <strong>api:handle_request (hostdata)</strong>
+    </dt>
+    <dd>
+    handle the request.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">hostdata</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "api:load_class"></a>
+    <strong>api:load_class (path)</strong>
+    </dt>
+    <dd>
+    Load an API class. </p>
+
+<p> Loads a module containing an <a href="../modules/moonwalk.api.class.html">api.class</a>  instance, and registers the class
+ with the API.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+         The module path to the API class.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">"moonwalk"</span>
+ api.<span class="global">load</span> <span class="string">"transaction"</span>
+ api.handle_request(...)</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -32,7 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Operations">Operations </a></li>
+<li><a href="#Class_module">Class module </a></li>
 </ul>
 
 
@@ -40,13 +40,13 @@
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../modules/moonwalk.api.html">api</a></li>
   <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><strong>api.model</strong></li>
   <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
   <li><a href="../modules/moonwalk.connection.html">connection</a></li>
   <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
   <li><a href="../modules/moonwalk.drive.html">drive</a></li>
   <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><strong>resources</strong></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
   <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
   <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
   <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
@@ -62,25 +62,24 @@
 
 <div id="content">
 
-<h1>Module <code>moonwalk.resources</code></h1>
-<p>Swagger API Declarations and Resource Listings.</p>
-<p> This module is a Moonwalk API <code>class</code>, and it follows the same
- rules as any other API class, except that it doesn't show up in
- the Resource Listing (so it won't appear in the API Explorer or
- generated client code).</p>
+<h1>Module <code>moonwalk.api.model</code></h1>
+<p>API model.</p>
+<p>  Extends the <a href="../modules/moonwalk.proto.html">proto</a>  object.</p>
 
 
-<h2><a href="#Operations">Operations </a></h2>
+<h2><a href="#Class_module">Class module </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#get_api_declaration">get_api_declaration (name)</a></td>
-	<td class="summary">Get a Swagger <a href="https://github.com/wordnik/swagger-core/wiki/API-Declaration">API Declaration
- </a>.</td>
+	<td class="name" nowrap><a href="#module.properties_required">module.properties_required</a></td>
+	<td class="summary">Whether model properties are required by default.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#get_resource_listing">get_resource_listing ()</a></td>
-	<td class="summary">Get a Swagger <a href="https://github.com/wordnik/swagger-core/wiki/Resource-Listing">Resource Listing
- </a>.</td>
+	<td class="name" nowrap><a href="#model:finalize">model:finalize ()</a></td>
+	<td class="summary">Finalize a model definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#model:insert_into">model:insert_into (table, models)</a></td>
+	<td class="summary">Finalize a model definition and insert it into a table.</td>
 	</tr>
 </table>
 
@@ -88,26 +87,22 @@
 <br/>
 
 
-    <h2><a name="Operations"></a>Operations </h2>
-          Each function is an API <code>operation</code>.
+    <h2><a name="Class_module"></a>Class module </h2>
+
     <dl class="function">
     <dt>
-    <a name = "get_api_declaration"></a>
-    <strong>get_api_declaration (name)</strong>
+    <a name = "module.properties_required"></a>
+    <strong>module.properties_required</strong>
     </dt>
     <dd>
-    Get a Swagger <a href="https://github.com/wordnik/swagger-core/wiki/API-Declaration">API Declaration
- </a>. </p>
+    Whether model properties are required by default. </p>
 
-<p> <strong>Path:</strong> <br/>
- <code>/resources/{name}/</code>
+<p> When this is true, it can be overriden by adding <code>optional = true</code>
+ to model property definitions.
+ When it's false, it can be overriden by adding <code>required = true</code>.</p>
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">name</span>
-         The name of the API class.
-        </li>
-    </ul>
+<p> Defaults to <code>true</code>.
+
 
 
 
@@ -115,16 +110,38 @@
 
 </dd>
     <dt>
-    <a name = "get_resource_listing"></a>
-    <strong>get_resource_listing ()</strong>
+    <a name = "model:finalize"></a>
+    <strong>model:finalize ()</strong>
     </dt>
     <dd>
-    Get a Swagger <a href="https://github.com/wordnik/swagger-core/wiki/Resource-Listing">Resource Listing
- </a>. </p>
+    Finalize a model definition.
 
-<p> <strong>Path:</strong> <br/>
- <code>/resources/</code>
 
+
+
+
+
+</dd>
+    <dt>
+    <a name = "model:insert_into"></a>
+    <strong>model:insert_into (table, models)</strong>
+    </dt>
+    <dd>
+    Finalize a model definition and insert it into a table.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+
+
+        </li>
+        <li><span class="parameter">models</span>
+
+
+
+        </li>
+    </ul>
 
 
 

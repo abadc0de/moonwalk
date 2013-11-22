@@ -1,4 +1,4 @@
-local api = require 'moonwalk/init'
+local api = require 'moonwalk/api'
 
 api.model "User" {
   id = {
@@ -37,7 +37,7 @@ return api.class "User stuff" {
     
     @return (boolean): Returns `true` if successful, else `false`.
   
-  ]] .. 
+  ]] ..
   function(id, reason, dryRun, connection)
   
     return {status = "success", message = "user deleted", 

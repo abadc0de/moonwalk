@@ -155,8 +155,8 @@ function SocketServer:handleClient(client)
   local request = { headers = {}, api_root = self.api_root }
   local data, status, part = client:receive()
   
-  if err then
-    print('error getting data from client: ' .. err)
+  if status then
+    print('error getting data from client: ' .. status)
     return
   end
   

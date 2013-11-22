@@ -1,0 +1,579 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Moonwalk API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Moonwalk API</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Installing">Installing </a></li>
+<li><a href="#Overview">Overview </a></li>
+<li><a href="#Validation">Validation </a></li>
+<li><a href="#Models">Models </a></li>
+<li><a href="#Host_environments">Host environments </a></li>
+<li><a href="#License">License </a></li>
+<li><a href="#References">References </a></li>
+</ul>
+
+
+<h2>Topics</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>README</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../modules/moonwalk.api.html">api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>Moonwalk</h1>
+
+<p>Moonwalk is a <a href="http://developers.helloreverb.com/swagger/">Swagger</a> server implementation for Lua.</p>
+
+<p><strong>Warning:</strong> This project is under heavy development. The
+Moonwalk API is not stable. Moonwalk itself is not stable.
+Don't use this in production (yet).</p>
+
+<p>Moonwalk is designed to work under various host environments.
+Currently Moonwalk supports <a href="http://www.ietf.org/rfc/rfc3875">CGI</a>, <a href="https://github.com/cesanta/mongoose">Mongoose</a>, <a href="https://github.com/sunsetbrew/civetweb">Civetweb</a>, and
+<a href="https://github.com/ignacio/luanode">LuaNode</a>, as well as a built-in testing server, "SocketServer".
+Support can easily be added for other host environments.</p>
+
+<p>This document should cover most of what you need to get started.
+For more advanced topics, see the <a href="http://abadc0de.github.io/moonwalk/docs">generated documentation
+</a>.</p>
+
+
+<p><a name="Installing"></a></p>
+<h2>Installing</h2>
+
+<p>To get started with Moonwalk, you can clone this git repository, which
+includes Moonwalk, the API Explorer, example code, and documentation.</p>
+
+
+<pre>
+ git clone https://github.com/abadc0de/moonwalk.git
+ luarocks install moonwalk <span class="comment">--from=moonwalk/rocks
+</span>
+</pre>
+
+<p>If you don't need the API Explorer or any examples, you can install Moonwalk
+without cloning the repository:</p>
+
+
+<pre>
+ luarocks install moonwalk <span class="comment">--from=http://abadc0de.github.io/moonwalk/rocks
+</span>
+</pre>
+
+<p><a name="Overview"></a></p>
+<h2>Overview</h2>
+
+<h3>Index page</h3>
+
+<p>Your API's index page should something like this:</p>
+
+
+<pre>
+ <span class="comment">-- index.lua
+</span>
+ <span class="comment">-- 1: Load Moonwalk
+</span> <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">'moonwalk'</span>
+
+ <span class="comment">-- 2: Register APIs
+</span> api.register <span class="string">'user'</span>
+ api.register <span class="string">'widget'</span>
+ api.register <span class="string">'gadget'</span>
+
+ <span class="comment">-- 3: Handle request
+</span> api.handle_request(...)
+</pre>
+
+<p>1.  Require Moonwalk and assign it to a local variable.</p>
+
+<ol>
+    <li>Call <code>.register</code> once for each documented API module (see below).
+
+<pre>
+ Use <span class="backtick"><a href="http://www.lua.org/manual/5.1/manual.html#pdf-require">require</a> </span>-style paths.
+</pre>
+</li>
+    <li>Call <code>.handle_request(...)</code>. Make sure to pass the ellipses as
+
+<pre>
+ shown, <span class="keyword">or</span> LuaNode <span class="keyword">and</span> SocketServer won't work.
+</pre>
+
+<h3>Documenting your API</h3></li>
+</ol>
+
+<p>Functions in your API should be decorated with doc blocks.
+Valid tags include <code>@path</code>, <code>@param</code>, and <code>@return</code>.</p>
+
+<p>Here's a quick example of a complete API with a single operation:</p>
+
+
+<pre>
+ <span class="comment">-- user.lua
+</span>
+ <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">"moonwalk"</span>
+
+ <span class="keyword">return</span> api.<span class="global">module</span> <span class="string">"User operations"</span> {
+
+   create = api.operation <span class="string">[[
+     Create a new user.
+
+     @path POST /user/
+
+     @param email: User's email address.
+     @param password: User's new password.
+     @param phone (number, optional): User's phone number.
+
+     @return (number): User's ID number.
+   ]]</span> ..
+   <span class="keyword">function</span>(email, password, phone)
+     <span class="keyword">return</span> <span class="number">123</span>
+   <span class="keyword">end</span>,
+
+ }
+</pre>
+
+<p>Instead of comments, the following construct is used to create a doc block:</p>
+
+<ul>
+    <li>The Moonwalk <code>operation</code> function </li>
+    <li>The doc string, enclosed between <code>[[</code> and <code>]]</code> </li>
+    <li>The concatenation operator, <code>..</code> </li>
+    <li>A function definition (the "operation").</li>
+</ul>
+
+<p>For some background on this technique, see the <a href="http://lua-users.org/wiki/DecoratorsAndDocstrings">DecoratorsAndDocstrings</a>
+page in the Lua users wiki.</p>
+
+
+<h3>The @path tag</h3>
+
+<p>The <code>@path</code> tag is used to provide the HTTP request method and resource
+path for the operation. "Path parameters" may be included as part of the
+path, by enclosing the parameter name in braces. For example:</p>
+
+
+<pre>
+ @path GET /widget/{id}/
+</pre>
+
+<h3>The @param tag</h3>
+
+<p>The <code>@param</code> tag may contain additional information, enclosed in
+parentheses, after the parameter name. This can include the
+<strong>data type</strong>, the word "from" followed by the <strong>param type</strong>,
+optionally separated by punctuation. It may also include punctuation
+after the parentheses to visually separate the description. For example:</p>
+
+
+<pre>
+ @param id (integer, from path): The ID of the widget to fetch.
+</pre>
+
+<h3>The @return tag</h3>
+
+<p>The <code>@return</code> tag may contain a data type annotation, enclosed in
+parentheses, before the description, optionally followed by
+punctuation. For example:</p>
+
+
+<pre>
+ @<span class="keyword">return</span> (integer): The ID of the newly-created widget.
+</pre>
+
+<p><a name="Validation"></a></p>
+<h2>Validation</h2>
+
+<p>In <code>@param</code> and <code>@return</code> tags, any <strong>data type</strong> name may be used,
+but built-in type checking is only provided for the following:</p>
+
+<p><code>integer</code>, <code>number</code>, <a href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> , <code>boolean</code>, <code>object</code>, <code>array</code></p>
+
+<p>In <code>@param</code> tags, the <strong>param type</strong> determines how information is
+sent to the API. Valid values are:</p>
+
+<p><code>path</code>, <code>query</code>, <code>body</code>, <code>header</code>, <code>form</code></p>
+
+<p>If the <strong>data type</strong> annotation is present, it <em>must be listed first</em>.
+All other parenthesized annotations may be listed in any order.
+Any annotation may be omitted, in which case the default values will be used.
+If all annotations within the parentheses are omitted, the parentheses may
+also be omitted.</p>
+
+<p>The default <strong>data type</strong> is <a href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a> , and the default <strong>param type</strong>
+is determined as follows:</p>
+
+<ul>
+    <li><p>If the parameter name appears in curly brackets in the <code>@path</code>,</p>
+
+<pre>
+ the default param <span class="global">type</span> is <span class="backtick"><code>path</code></span>.
+</pre>
+</li>
+    <li><p>If the HTTP method is <code>POST</code>, the default param type is <code>form</code>.</p></li>
+    <li><p>In all other cases, the default param type is <code>query</code>.</p></li>
+</ul>
+
+<p>In addition to a <strong>data type</strong> and <strong>param type</strong>, the <code>@param</code> tag may
+include additional validation annotations within the parentheses following
+the parameter name. Recognized annotations draw from the <a href="http://json-schema.org/latest/json-schema-validation.html">JSON Schema</a>
+validation specification.</p>
+
+
+<h3>Validation for all types</h3>
+
+<p>These validation annotations are available for any parameter.</p>
+
+<ul>
+    <li><strong>optional</strong></li>
+</ul>
+
+
+<pre>
+ By default, all parameters are required. To make a parameter optional,
+ use the <span class="backtick"><code>optional</code></span> annotation.
+</pre>
+
+<h3>Numeric validation</h3>
+
+<p>These validation annotations are available for
+<code>number</code> and <code>integer</code> parameters.</p>
+
+<ul>
+    <li><strong>maximum</strong> <em>(partly implemented)</em></li>
+</ul>
+
+
+<pre>
+ Numeric parameters may enforce a maximum value using the
+ annotation <span class="backtick"><code>maximum N [exclusive]</code></span>, where *N* is
+ any valid number, optionally followed by <span class="backtick"><code>exclusive</code></span> to
+ indicate that the value must be less than (but <span class="keyword">not</span> equal to) *N*.
+</pre>
+
+<p>*   <strong>minimum</strong> <em>(partly implemented)</em></p>
+
+
+<pre>
+ Numeric parameters may enforce a minimum value using the
+ annotation <span class="backtick"><code>minimum N [exclusive]</code></span>, where *N* is
+ any valid number, optionally followed by <span class="backtick"><code>exclusive</code></span> to
+ indicate that the value must be greater than (but <span class="keyword">not</span> equal to) *N*.
+</pre>
+
+<p>*   <strong>multipleOf</strong></p>
+
+
+<pre>
+ Numeric parameters may limit a value to being evenly divisible
+ by a number using the annotation <span class="backtick"><code>multipleOf N</code></span>,
+ where *N* is any valid number greater than <span class="number">0.</span>
+</pre>
+
+<h3>String validation</h3>
+
+<p>These validation annotations are available for<a href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a>  parameters.</p>
+
+<ul>
+    <li><strong>maxLength</strong></li>
+</ul>
+
+
+<pre>
+ String parameters may enforce a maximum length using the
+ annotation <span class="backtick"><code>maxLength N</code></span>, where *N* is any valid
+ non-negative integer.
+</pre>
+
+<p>*   <strong>minLength</strong></p>
+
+
+<pre>
+ String parameters may enforce a minimum length using the
+ annotation <span class="backtick"><code>minLength N</code></span>, where *N* is any valid
+ non-negative integer.
+</pre>
+
+<p>*   <strong>pattern</strong> <em>(not yet implemented)</em></p>
+
+
+<pre>
+ String parameters may be checked against a regular expression
+ using the annotation <span class="backtick"><code>pattern P</code></span>, where *P* is any
+ valid regular expression, enclosed <span class="keyword">in</span> backticks.
+</pre>
+
+<h3>Array validation</h3>
+
+<p>These validation annotations are available for <code>array</code> parameters.</p>
+
+<ul>
+    <li><strong>maxItems</strong></li>
+</ul>
+
+
+<pre>
+ Array parameters may enforce a maximum length using the
+ annotation <span class="backtick"><code>maxItems N</code></span>, where *N* is any valid
+ non-negative integer.
+</pre>
+
+<p>*   <strong>minItems</strong></p>
+
+
+<pre>
+ Array parameters may enforce a minimum length using the
+ annotation <span class="backtick"><code>minItems N</code></span>, where *N* is any valid
+ non-negative integer.
+</pre>
+
+<p>*   <strong>uniqueItems</strong></p>
+
+
+<pre>
+ Array parameters may ensure that every item <span class="keyword">in</span> the array
+ is unique using the <span class="backtick"><code>uniqueItems</code></span> annotation.
+</pre>
+
+<p><a name="Models"></a></p>
+<h2>Models</h2>
+
+<p>Models are a useful way to document how an object should look.
+Currently no built-in validation is provided for models, but
+some Swagger clients may use this information to provide
+client side validation or documentation. They also show up
+in the API Explorer.</p>
+
+<p>You can define models like this:</p>
+
+
+<pre>
+ <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">"moonwalk"</span>
+
+ api.model <span class="string">"User"</span> {
+   id = {
+     <span class="global">type</span> = <span class="string">"integer"</span>,
+     minimum = <span class="number">1</span>,
+     description = <span class="string">"The user's ID number"</span>
+   },
+   email = {
+     description = <span class="string">"The user's email address"</span>
+   },
+   name = {
+     optional = <span class="keyword">true</span>,
+     description = <span class="string">"The user's full name"</span>
+   },
+   phone = {
+     <span class="global">type</span> = <span class="string">"integer"</span>,
+     optional = <span class="keyword">true</span>,
+     description = <span class="string">"The user's phone number"</span>,
+   },
+ }
+</pre>
+
+<p>This is essentially the <code>properties</code> object in a Swagger <code>models</code>
+section. You can use the model name as a <strong>data type</strong> in your
+<code>@param</code> and <code>@return</code> tags, and in other models. You can also use
+full Swagger-style model definitions. Models defined using the short
+syntax above will be converted to full definitions by <code>.model</code>.
+See Swagger's <a href="https://github.com/wordnik/swagger-core/wiki/Datatypes#complex-types">Complex Types</a> for more information.</p>
+
+
+<p><a name="Host_environments"></a></p>
+<h2>Host environments</h2>
+
+<p>Some host environments (SocketServer, LuaNode) use one Lua state
+across multiple requests, while others (CGI, Mongoose, Civetweb)
+handle each request in a separate Lua state. We'll call the first
+category "persistent hosts" and the second "traditional hosts."</p>
+
+<h3>SocketServer</h3>
+
+<p>Invoke the built-in Lua server like this:</p>
+
+
+<pre>
+ lua moonwalk/server/socket.lua /example/ <span class="number">8910</span>
+</pre>
+
+<p>Where <code>/example/</code> is your API root and <code>8910</code> is the port to use.</p>
+
+<h3>LuaNode</h3>
+
+<p>Experimental support for LuaNode is included. Invoke the server like this:</p>
+
+
+<pre>
+ /path/to/luanode moonwalk/server/luanode.lua /example/ <span class="number">8910</span>
+</pre>
+
+<p>Where <code>/example/</code> is your API root and <code>8910</code> is the port to use.</p>
+
+<h3>Mongoose/Civetweb</h3>
+
+<p>Mongoose/Civetweb support is included. Invoke the server like this:</p>
+
+
+<pre>
+ /path/to/server/binary \
+ -document_root /srv/www/moonwalk/ \
+ -url_rewrite_patterns /example/**=example/index.lp
+</pre>
+
+<h3>Apache CGI Setup</h3>
+
+<p>Use this Apache vhost configuration and .htaccess file
+as an example.</p>
+
+<h4>Apache vhost config</h4>
+
+
+<pre>
+ &lt;VirtualHost *:<span class="number">80</span>&gt;
+     ServerName moonwalk.<span class="keyword">local</span>
+     DocumentRoot /srv/www/moonwalk
+     &lt;Directory /srv/www/moonwalk&gt;
+         Options +ExecCGI
+         AddHandler cgi-script .lua
+         DirectoryIndex index.lua index.html
+         AllowOverride All
+         Order allow,deny
+         allow from all
+     &lt;/Directory&gt;
+ &lt;/VirtualHost&gt;
+</pre>
+
+<h4>Apache .htaccess</h4>
+
+
+<pre>
+ RewriteEngine On
+ RewriteCond $<span class="number">1</span> !(^index\.lua)
+ RewriteRule ^(.*)$ index.lua/$<span class="number">1</span> [L]
+</pre>
+
+<h4>CGI troubleshooting</h4>
+
+<ul>
+    <li>Make sure the shebang line has the correct path to the Lua executable.
+
+<pre>
+ For example, <span class="backtick"><code>#! /usr/bin/lua</code></span> may need to become <span class="backtick"><code>#! /usr/local/bin/lua</code></span>.
+</pre>
+</li>
+    <li>Make sure any files with the shebang are executable (chmod +x).</li>
+</ul>
+
+
+
+<p><a name="License"></a></p>
+<h2>License</h2>
+
+<p>Copyright &copy; 2013 Moonwalk Authors</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+
+<p><a name="References"></a></p>
+<h2>References</h2>
+
+<p>Lua references:</p>
+
+<ul>
+    <li><a href="http://www.lua.org/manual/5.2/">Lua 5.2 user manual</a></li>
+</ul>
+
+<p>Swagger references:</p>
+
+<ul>
+    <li><a href="https://github.com/wordnik/swagger-core/wiki">Swagger wiki</a></li>
+</ul>
+
+<p>CGI references:</p>
+
+<ul>
+    <li><p><a href="http://www.ietf.org/rfc/rfc3875">CGI spec</a></p></li>
+    <li><p><a href="http://httpd.apache.org/docs/2.2/howto/cgi.html">Apache CGI docs</a></p></li>
+</ul>
+
+<p>Mongoose and Civetweb references:</p>
+
+<ul>
+    <li><p><a href="https://github.com/cesanta/mongoose/blob/master/docs/LuaSqlite.md">Mongoose Lua server pages</a></p></li>
+    <li><p><a href="http://groups.google.com/group/mongoose-users">Mongoose users group</a></p></li>
+    <li><p><a href="http://groups.google.com/group/civetweb">Civetweb users group</a></p></li>
+</ul>
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
