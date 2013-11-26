@@ -7,8 +7,7 @@ description = 'Moonwalk'
 full_description = [[Zero-friction REST APIs for Lua.
 
 For normal use, you'll only need to require the `api` module.
-The [readme](https://github.com/abadc0de/moonwalk/blob/gh-pages/README.md)
-covers most of what you need to know to create an API.
+`README.md` covers most of what you need to know to create an API.
 
 You may also want to use `drive` to help serve files, or `proto` for
 simple OOP-style inheritance, or take advantage of the text processing
@@ -29,7 +28,10 @@ file = {'moonwalk', exclude = {
 
 readme = { 
   'README.md',
+
 }
+
+new_type('path', 'Resource path') 
 
 sort_modules = true
 sort = false

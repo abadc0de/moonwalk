@@ -44,23 +44,22 @@ Your API's index page should something like this:
     -- index.lua
 
     -- 1: Load Moonwalk
-    local api = require 'moonwalk'
+    local api = require 'moonwalk/api'
 
     -- 2: Register APIs
-    api.register 'user'
-    api.register 'widget'
-    api.register 'gadget'
+    api:load_class 'user'
+    api:load_class 'widget'
+    api:load_class 'gadget'
     
     -- 3: Handle request
-    api.handle_request(...)
-    
+    api:handle_request(...)
+
 1.  Require Moonwalk and assign it to a local variable.
 
-2.  Call `.register` once for each documented API module (see below).
-    Use `require`-style paths.
+2.  Call `api:load_class` once for each API class (see below).
 
-3.  Call `.handle_request(...)`. Make sure to pass the ellipses as
-    shown, or LuaNode and SocketServer won't work.
+3.  Call `api:handle_request`.
+    Make sure to pass the ellipses (varargs) as shown.
 
 ### Documenting your API ###
 
@@ -69,40 +68,30 @@ Valid tags include `@path`, `@param`, and `@return`.
 
 Here's a quick example of a complete API with a single operation:
 
-    -- user.lua
+**user.lua**
 
-    local api = require "moonwalk"
+    --- User API
 
-    return api.module "User operations" {
+    return {
 
-      create = api.operation [[ 
-        Create a new user.
-
-        @path POST /user/
-
-        @param email: User's email address.
-        @param password: User's new password.
-        @param phone (number, optional): User's phone number.
-        
-        @return (number): User's ID number. 
-      ]] .. 
-      function(email, password, phone) 
+      --- Create a new user.
+      --
+      -- @path POST /user/
+      --
+      -- @param email: User's email address.
+      -- @param password: User's new password.
+      -- @param phone (optional): User's phone number.
+      --
+      -- @return (number): User's ID number. 
+      --
+      create = function(email, password, phone) 
         return 123
       end,
 
     }
 
-Instead of comments, the following construct is used to create a doc block:
-
-*   The Moonwalk `operation` function 
-*   The doc string, enclosed between `[[` and `]]` 
-*   The concatenation operator, `..` 
-*   A function definition (the "operation").
-
-For some background on this technique, see the [DecoratorsAndDocstrings][7]
-page in the Lua users wiki.
-
-[7]: http://lua-users.org/wiki/DecoratorsAndDocstrings
+Moonwalk parses the docstring to determine the request method, resource
+path, and parameters for the function.
 
 ### The @path tag ###
 
@@ -252,7 +241,7 @@ in the API Explorer.
 
 You can define models like this:
 
-    local api = require "moonwalk"
+    local api = require "moonwalk/api"
 
     api.model "User" {
       id = {

@@ -65,10 +65,10 @@ function operation:decode_docblock(name, api)
   if not doc then return end
   
   -- remove indentation
-  doc = doc:gsub('[\r\n]' .. (doc:match '[\r\n](%s+)%a' or ''), '\n')
+  doc = doc:gsub('[\r\n]' .. (doc:match '[\r\n](%s+)' or ''), '\n')
   
-  local summary = doc:match '%s+(.-)%s*[\r\n]%s*[\r\n]' or ''
-  local notes = doc:match '%s+.-%s*[\r\n]%s*[\r\n](.-)%s*@' or ''
+  local summary = doc:match '^%s+(.-)%s*[\r\n]' or ''
+  local notes = doc:match '^.-[\r\n](.-)%s*@' or ''
   local path = doc:match '@path%s+%a+%s+([^\r\n%s]+)'
   local method = doc:match '@path%s+(%a+)'
   local return_type = doc:match '@return%s+.-(%a+)'

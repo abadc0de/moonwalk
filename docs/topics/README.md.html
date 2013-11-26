@@ -121,30 +121,25 @@ without cloning the repository:</p>
  <span class="comment">-- index.lua
 </span>
  <span class="comment">-- 1: Load Moonwalk
-</span> <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">'moonwalk'</span>
+</span> <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">'moonwalk/api'</span>
 
  <span class="comment">-- 2: Register APIs
-</span> api.register <span class="string">'user'</span>
- api.register <span class="string">'widget'</span>
- api.register <span class="string">'gadget'</span>
+</span> api:load_class <span class="string">'user'</span>
+ api:load_class <span class="string">'widget'</span>
+ api:load_class <span class="string">'gadget'</span>
 
  <span class="comment">-- 3: Handle request
-</span> api.handle_request(...)
+</span> api:handle_request(...)
 </pre>
 
 <p>1.  Require Moonwalk and assign it to a local variable.</p>
 
 <ol>
-    <li>Call <code>.register</code> once for each documented API module (see below).
+    <li><p>Call <code>api:load_class</code> once for each API class (see below).</p></li>
+    <li><p>Call <code>api:handle_request</code>.</p>
 
 <pre>
- Use <span class="backtick"><a href="http://www.lua.org/manual/5.1/manual.html#pdf-require">require</a> </span>-style paths.
-</pre>
-</li>
-    <li>Call <code>.handle_request(...)</code>. Make sure to pass the ellipses as
-
-<pre>
- shown, <span class="keyword">or</span> LuaNode <span class="keyword">and</span> SocketServer won't work.
+ Make sure to pass the ellipses (varargs) as shown.
 </pre>
 
 <h3>Documenting your API</h3></li>
@@ -155,44 +150,33 @@ Valid tags include <code>@path</code>, <code>@param</code>, and <code>@return</c
 
 <p>Here's a quick example of a complete API with a single operation:</p>
 
+<p><strong>user.lua</strong></p>
+
 
 <pre>
- <span class="comment">-- user.lua
+ <span class="comment">--- User API
 </span>
- <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">"moonwalk"</span>
+ <span class="keyword">return</span> {
 
- <span class="keyword">return</span> api.<span class="global">module</span> <span class="string">"User operations"</span> {
-
-   create = api.operation <span class="string">[[
-     Create a new user.
-
-     @path POST /user/
-
-     @param email: User's email address.
-     @param password: User's new password.
-     @param phone (number, optional): User's phone number.
-
-     @return (number): User's ID number.
-   ]]</span> ..
-   <span class="keyword">function</span>(email, password, phone)
+   <span class="comment">--- Create a new user.
+</span>   <span class="comment">--
+</span>   <span class="comment">-- @path POST /user/
+</span>   <span class="comment">--
+</span>   <span class="comment">-- @param email: User's email address.
+</span>   <span class="comment">-- @param password: User's new password.
+</span>   <span class="comment">-- @param phone (optional): User's phone number.
+</span>   <span class="comment">--
+</span>   <span class="comment">-- @return (number): User's ID number.
+</span>   <span class="comment">--
+</span>   create = <span class="keyword">function</span>(email, password, phone)
      <span class="keyword">return</span> <span class="number">123</span>
    <span class="keyword">end</span>,
 
  }
 </pre>
 
-<p>Instead of comments, the following construct is used to create a doc block:</p>
-
-<ul>
-    <li>The Moonwalk <code>operation</code> function </li>
-    <li>The doc string, enclosed between <code>[[</code> and <code>]]</code> </li>
-    <li>The concatenation operator, <code>..</code> </li>
-    <li>A function definition (the "operation").</li>
-</ul>
-
-<p>For some background on this technique, see the <a href="http://lua-users.org/wiki/DecoratorsAndDocstrings">DecoratorsAndDocstrings</a>
-page in the Lua users wiki.</p>
-
+<p>Moonwalk parses the docstring to determine the request method, resource
+path, and parameters for the function.</p>
 
 <h3>The @path tag</h3>
 
@@ -396,7 +380,7 @@ in the API Explorer.</p>
 
 
 <pre>
- <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">"moonwalk"</span>
+ <span class="keyword">local</span> api = <span class="global">require</span> <span class="string">"moonwalk/api"</span>
 
  api.model <span class="string">"User"</span> {
    id = {

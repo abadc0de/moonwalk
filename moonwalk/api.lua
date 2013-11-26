@@ -146,33 +146,67 @@ function api:load_class(path)
 
   if self.classes[path] then return end
   
-  local source
-  local class
-  local file = io.open(path .. '.lua')
+  local file, source, obj, class_instance
+  
+  for v in package.path:gmatch '[^;]+' do
+    file = io.open((v:gsub('%?', path)))
+    if file then break end
+  end
   
   if file then 
     source = file:read '*a'
-    class = loadstring(source)()
+    class_instance = loadstring(source)()
   else
-    class = require(path)
+    class_instance = require(path)
   end
   
-  if not class.is_api_class then
+  if not class_instance.is_api_class then
+  
     if not source then
       error(path .. " is not an api class")
+    end
+    obj = class_instance
+    class_instance = class(nil, nil)
+    
+    local lines = {}
+    local comment, doc, was_comment, needs_function, not_first
+    for line in source:gmatch '(.-)[\r\n]' do
+      comment = line:match '^%s*%-%-%-*(.*)$'
+      if comment then
+        table.insert(lines, comment)
+        was_comment = true
+      elseif was_comment then
+        doc = table.concat(lines, '\n')
+        lines = {}
+        was_comment = false
+        if not_first then
+          needs_function = true
+        else
+          not_first = true
+          class_instance.title = doc:match('^%s*(.-)%s*$')
+        end
+      end
+      if needs_function then
+        local func = line:match '([_%a][_%w]*)%s*=%s*function'
+            or line:match 'function%s+.-([_%a][_%w]*)[%s%(]'
+        if func then
+          class_instance.operations[func] = operation(doc, obj[func])
+          needs_function = false
+        end
+      end
     end
     
   end
   
-  if not class.operations.hide_api_info then
+  if not class_instance.operations.hide_api_info then
     table.insert(self.info, {
       path = '/' .. path,
-      description = class.title,
+      description = class_instance.title,
     })
   end
   
-  self.classes[path] = class
+  self.classes[path] = class_instance
 end
 
+return proto:extend(api)()
 
-return proto:extend(api)

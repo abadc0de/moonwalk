@@ -1,8 +1,8 @@
 #!/usr/bin/env lua
 
-local moonwalk = require 'moonwalk/init'
+local api = require 'moonwalk/api'
 local markdown = require 'moonwalk/lib/markdown'
-local conn = moonwalk.get_connection(...)
+local conn = api:get_connection(...)
 
 conn:send_head('200 OK', { ['Content-Type'] = 'text/html' })
 
@@ -73,7 +73,7 @@ onscroll = stickHead
 the documentation below.</p>
 ]]
 
-conn:send("<dt> Host environment: </dt><dd>" .. conn.name .. "</dd>")
+-- conn:send("<dt> Host environment: </dt><dd>" .. conn.name .. "</dd>")
 
 conn:send(markdown(io.open 'README.md':read '*a'))
 

@@ -20,27 +20,32 @@ build = {
    type = "builtin",
    -- TODO: generate this damn thing
    modules = {
-      ["moonwalk"] = "init.lua",
-      ["moonwalk.config"] = "config.lua",
+      
+      ["moonwalk.api"] = "moonwalk/api.lua",
+      ["moonwalk.api.class"] = "moonwalk/api/class.lua",
+      ["moonwalk.api.model"] = "moonwalk/api/model.lua",
+      ["moonwalk.api.operation"] = "moonwalk/api/operation.lua",
+      
       ["moonwalk.connection"] = "connection.lua",
       ["moonwalk.connection.abstract"] = "connection/abstract.lua",
       ["moonwalk.connection.cgi"] = "connection/cgi.lua",
       ["moonwalk.connection.luanode"] = "connection/luanode.lua",
       ["moonwalk.connection.mongoose"] = "connection/mongoose.lua",
       ["moonwalk.connection.socket"] = "connection/socket.lua",
+      
       ["moonwalk.drive"] = "drive.lua",
-      ["moonwalk.facade"] = "facade.lua",
-      ["moonwalk.init"] = "init.lua",
+      
       ["moonwalk.lib.json"] = "lib/json.lua",
       ["moonwalk.lib.markdown"] = "lib/markdown.lua",
       ["moonwalk.lib.memoize"] = "lib/memoize.lua",
-      ["moonwalk.locator"] = "locator.lua",
-      ["moonwalk.parser"] = "parser.lua",
+      
       ["moonwalk.proto"] = "proto.lua",
       ["moonwalk.resources"] = "resources.lua",
+      
       ["moonwalk.server.luanode"] = "server/luanode.lua",
       ["moonwalk.server.socket"] = "server/socket.lua",
-      ["moonwalk.static"] = "static.lua",
+      
+      ["moonwalk.sugar"] = "sugar.lua",
       ["moonwalk.util"] = "util.lua",
       ["moonwalk.validator"] = "validator.lua",
    }

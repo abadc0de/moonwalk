@@ -22,7 +22,7 @@ build() {
 <code>Redirecting to <a href='$source_url'>$source_url</a></code>
 </body></html>" > rocks/$package/index.html
 
-   rm -rf docs/*; ldoc .
+   rm -rf docs/*; lua ../LDoc/ldoc.lua .
 
 }
 
