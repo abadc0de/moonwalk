@@ -4,7 +4,6 @@
 local proto = require 'moonwalk/proto'
 local sugar = require 'moonwalk/sugar'
 
---- @type module
 local class = proto:extend()
 
 class.is_api_class = true

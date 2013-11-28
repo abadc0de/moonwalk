@@ -31,12 +31,12 @@ local create_resource_listing = memoize(function(api)
   }
 end)
 
-local create_api_declaration = memoize(function(api, base, path)
+local create_api_declaration = memoize(function(api, base, name)
   
   -- local api = connection.api
   -- local base = get_base_path(connection)
   -- local path = util.trim_path(connection.request.path)
-  local resource_path = path:gsub('^' .. resource_list_path, '')
+  local resource_path = name
   
   local class = api.classes[resource_path]
   
@@ -83,7 +83,7 @@ end)
 -- @section operations
 --
 
-return api.class("Swagger resources",{
+return api.class("Swagger resources", {
 
   hide_api_info = true,
 
@@ -105,7 +105,7 @@ return api.class("Swagger resources",{
     local base = get_base_path(connection)
     local path = util.trim_path(connection.request.path)
     
-    return create_api_declaration(api, base, path)
+    return create_api_declaration(api, base, name)
   end),
 
   --- Get a Swagger [Resource Listing

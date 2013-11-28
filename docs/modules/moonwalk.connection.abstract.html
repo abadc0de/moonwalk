@@ -39,24 +39,30 @@
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../modules/moonwalk.api.html">api</a></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><strong>connection.abstract</strong></li>
-  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
-  <li><a href="../modules/moonwalk.util.html">util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><a href="../modules/moonwalk.api.html">moonwalk.api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">moonwalk.api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><strong>moonwalk.connection.abstract</strong></li>
+  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">moonwalk.sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -138,6 +144,8 @@
  If supported, return an appropriate name for the host environment,
  otherwise return <code>nil</code>.
 
+    </ul>
+
 
     <h3>Returns:</h3>
     <ol>
@@ -160,6 +168,8 @@
     <dd>
     Get the request method.  Equivalent to CGI's
  <a href="http://tools.ietf.org/html/rfc3875#section-4.1.12">REQUEST_METHOD</a>.
+
+    </ul>
 
 
 
@@ -185,6 +195,8 @@
  to <code>/somewhere/index.lua</code>, then the path info for a request to
  <code>/somewhere/something/123/</code> should be <code>/something/123/</code>
 
+    </ul>
+
 
     <h3>Returns:</h3>
     <ol>
@@ -206,6 +218,8 @@
     </dt>
     <dd>
     Get the URI scheme.
+
+    </ul>
 
 
     <h3>Returns:</h3>
@@ -233,6 +247,8 @@
  to <code>/somewhere/index.lua</code>, then the script for a request to
  <code>/somewhere/something/123/</code> should be <code>somewhere/index.lua</code>
 
+    </ul>
+
 
     <h3>Returns:</h3>
     <ol>
@@ -256,6 +272,8 @@
     Get the query string.  Equivalent to CGI's
  <a href="http://tools.ietf.org/html/rfc3875#section-4.1.7">QUERY_STRING</a>.
 
+    </ul>
+
 
     <h3>Returns:</h3>
     <ol>
@@ -273,6 +291,8 @@
     </dt>
     <dd>
     Get the value of an HTTP header.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -302,6 +322,8 @@
  <a href="../modules/moonwalk.connection.abstract.html#connection:send_head">connection:send_head</a>  has been called. It should be
  called at least once per request.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">data</span>
@@ -322,6 +344,8 @@
     Send the response head. </p>
 
 <p> This should only be called once per request.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -350,6 +374,8 @@
  It will be called at least once for each request
  with a <code>Content-Length</code> header. When there is
  no more data to receive, be sure to return <code>nil</code>.
+
+    </ul>
 
 
     <h3>Returns:</h3>

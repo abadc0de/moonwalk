@@ -32,9 +32,9 @@ local user = {
   --  
   -- @path GET /user/{id}/  
   --  
-  -- @param id (integer, minimum 1): ID of the user to load.
+  -- @param[type=integer,minimum=1] id ID of the user to load.
   -- 
-  -- @return (User): User details.
+  -- @return[type=User] User details.
   --
 
   read = function(id, connection)
@@ -50,12 +50,12 @@ local user = {
   --
   -- @path POST /user/  
   --
-  -- @param email: The user's valid email address.
-  -- @param password: The user's password.
-  -- @param name (optional): The user's name.
-  -- @param phone (integer, optional, minimum 1000000000): The user's phone number.
+  -- @param email The user's valid email address.
+  -- @param password The user's password.
+  -- @param[opt] name The user's name.
+  -- @param[opt] phone The user's phone number.
   --
-  -- @return (User): The newly created user.
+  -- @return[type=User] The newly created user.
   create = function(email, password, name, phone)
     fake_db[next_id] = { 
         id = next_id, email = email, name = name, phone = phone
@@ -69,11 +69,11 @@ local user = {
 -- 
 -- @path DELETE /user/{id}/  
 -- 
--- @param id (integer, minimum 1, maximum 20, multipleOf 3) - ID of the user to delete.
--- @param reason (optional, maxLength 20) - Reason the user is being deleted.
--- @param dryRun (boolean) - Don't really delete the user.
+-- @param[type=integer] id ID of the user to delete.
+-- @param[opt] reason Reason the user is being deleted.
+-- @param[type=boolean] dryRun Don't really delete the user.
 -- 
--- @return (User): Deleted user details.
+-- @return[type=User] Deleted user details.
 --
 function user.delete(id, reason, dryRun, connection)
   local target = fake_db[id]

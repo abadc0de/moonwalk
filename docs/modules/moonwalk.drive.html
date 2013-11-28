@@ -38,24 +38,30 @@
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../modules/moonwalk.api.html">api</a></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
-  <li><strong>drive</strong></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
-  <li><a href="../modules/moonwalk.util.html">util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><a href="../modules/moonwalk.api.html">moonwalk.api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">moonwalk.api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
+  <li><strong>moonwalk.drive</strong></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">moonwalk.sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -106,6 +112,8 @@
     <dd>
     Guess a file's MIME type.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
@@ -130,6 +138,8 @@
     <dd>
     Determine if path is a directory.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
@@ -153,6 +163,9 @@
     </dt>
     <dd>
     Get file's last modified date.
+ May return <code>nil</code> if unable to get a timestamp.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -165,7 +178,6 @@
     <ol>
 
          Timestamp representing the last modification time.
- May return <code>nil</code> if unable to get a timestamp.
     </ol>
 
 
@@ -178,6 +190,9 @@
     </dt>
     <dd>
     Determine if path (file or directory) exists.
+.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -190,7 +205,6 @@
     <ol>
 
         <code>true</code> if the path exists, else <code>false</code>
-.
     </ol>
 
 
@@ -206,6 +220,8 @@
 
 <p> This is used to pass arbitrary data (<code>hostdata</code>) to the file
  so that it is available to the <a href="../modules/moonwalk.connection.html">connection</a> .
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>

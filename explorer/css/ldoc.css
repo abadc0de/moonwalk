@@ -6,7 +6,7 @@
   background: black url(../explorer/images/moonrise.png) no-repeat 50% 100%;
   background-size: auto 200%;
   box-shadow:0 0 20px black inset;
-  position:relative; -webkit-transition: background 5s linear;
+  position:relative;
 }
 
 #main { max-width: 960px; margin: auto !important; }

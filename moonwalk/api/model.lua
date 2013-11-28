@@ -4,7 +4,6 @@
 local proto = require 'moonwalk/proto'
 local sugar = require 'moonwalk/sugar'
 
---- @type module
 local model = proto:extend()
 
 --- Whether model properties are required by default.

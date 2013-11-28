@@ -38,24 +38,30 @@
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../modules/moonwalk.api.html">api</a></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><strong>sugar</strong></li>
-  <li><a href="../modules/moonwalk.util.html">util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><a href="../modules/moonwalk.api.html">moonwalk.api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">moonwalk.api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><strong>moonwalk.sugar</strong></li>
+  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -90,7 +96,16 @@
     <dd>
     Sweeten a function.  This effectively allows functions taking multiple
  arguments to be "called without parentheses." You probably don't need
- to use this.
+ to use this.</p>
+
+<p> method, <code>argc</code> should include the hidden <code>self</code> argument.</p>
+
+<p> If the wrapper is called with less than <code>argc</code> arguments, it will
+ return a <em>continuation object</em> that can be called or concatenated
+ with any remaining arguments. Otherwise, it will tail-call <code>fn</code>
+ and return the result.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -99,7 +114,6 @@
         </li>
         <li><span class="parameter">argc</span>
          The number of arguments <code>fn</code> takes. If <code>fn</code> is a table
- method, <code>argc</code> should include the hidden <code>self</code> argument.
         </li>
     </ul>
 
@@ -107,10 +121,6 @@
     <ol>
 
          A wrapper function for <code>fn</code>.
- If the wrapper is called with less than <code>argc</code> arguments, it will
- return a <em>continuation object</em> that can be called or concatenated
- with any remaining arguments. Otherwise, it will tail-call <code>fn</code>
- and return the result.
     </ol>
 
 

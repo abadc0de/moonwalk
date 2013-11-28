@@ -6,7 +6,6 @@ local sugar = require 'moonwalk/sugar'
 local util = require 'moonwalk/util'
 local validator = require 'moonwalk/validator'
 
---- @type module
 local operation = proto:extend()
 
 --- Use Markdown to format the "notes" section of the doc block.
@@ -32,10 +31,10 @@ operation.notes_format = [[<div class="notes">
 --- Create an operation. This function is not meant to be called directly
 -- (see `proto.constructor`). 
 --
--- @param docstring A string documenting the function, as described in the
--- readme.
+-- @param[type=string,opt] docstring A string documenting the function, as
+-- described in the readme.
 --
--- @param fn A function to handle this operation.
+-- @tparam ?function fn A function to handle this operation.
 --
 function operation:constructor(docstring, fn)
   self.docstring = docstring
@@ -71,7 +70,7 @@ function operation:decode_docblock(name, api)
   local notes = doc:match '^.-[\r\n](.-)%s*@' or ''
   local path = doc:match '@path%s+%a+%s+([^\r\n%s]+)'
   local method = doc:match '@path%s+(%a+)'
-  local return_type = doc:match '@return%s+.-(%a+)'
+  local return_type = doc:match '@return.-[,%[]type=([^,%]]+)[%],]'
   local params = {}
   
   local function format(s)
@@ -97,28 +96,30 @@ function operation:decode_docblock(name, api)
     local _, name_end, paren_end
     local p = {}
     local patterns = {
-      default = '[(].-default%s+`([^`]+)`.-[)]',
-      from = '[(].-from%s+(%a+).-[)]',
-      format = '[(].-format%s+(%w_-).-[)]',
-      optional = '[(].-(optional).-[)]',
+      default = '[,%[]opt=([^,%]]+)[%],]',
+      from = '[,%[]from=(%a+)[%],]',
+      format = '[,%[]format=([^,%]]+)[%],]',
+      optional = '[,%[](opt)[%],=]',
       -- numbers
-      maximum = '[(].-maximum%s+([%d.-]+).-[)]',
-      minimum = '[(].-minimum%s+([%d.-]+).-[)]',
-      multipleOf = '[(].-multipleOf%s+(%d+).-[)]',
+      maximum = '[,%[]maximum=([%d.-]+)[%],]',
+      minimum = '[,%[]minimum=([%d.-]+)[%],]',
+      multipleOf = '[,%[]multipleOf=(%d+)[%],]',
       -- strings
-      maxLength = '[(].-maxLength%s+(%d+).-[)]',
-      minLength = '[(].-minLength%s+(%d+).-[)]',
-      pattern = '[(].-pattern%s+`([^`]+)`.-[)]',
+      maxLength = '[,%[]maxLength=(%d+)[%],]',
+      minLength = '[,%[]minLength=(%d+)[%],]',
+      pattern = '[,%[]pattern=([^,%]]+)[%],]',
       -- arrays
-      maxItems = '[(].-maxItems%s+(%d+).-[)]',
-      minItems = '[(].-minItems%s+(%d+).-[)]',
-      uniqueItems = '[(].-(uniqueItems).-[)]',
+      maxItems = '[,%[]maxItems=(%d+)[%],]',
+      minItems = '[,%[]minItems=(%d+)[%],]',
+      uniqueItems = '[,%[](uniqueItems)[%],]',
     }
     
-    _, name_end, p.name = v:find '.-([%w_-]+)'
-    _, paren_end = v:find '[)]'
-    p.description = v:match('([^%p%s].-)\n*$', (paren_end or name_end) + 1)
-    p.dataType = v:match '[(]([%w_-]+).-[)]'
+    _, name_end, p.name = v:find '.-%].-([%w_-]+)'
+    if not _ then
+      _, name_end, p.name = v:find '.-([%w_-]+)'
+    end
+    p.description = v:match('([^%p%s].-)\n*$', name_end + 1)
+    p.dataType = v:match '[,%[]type=([^,%]]+)[%],]'
     p.default = v:match(patterns.default)
     p.paramType = v:match(patterns.from)
     p.format = v:match(patterns.format)
@@ -135,10 +136,6 @@ function operation:decode_docblock(name, api)
     p.maxItems = tonumber(v:match(patterns.maxItems))
     p.minItems = tonumber(v:match(patterns.minItems))
     p.uniqueItems = v:match(patterns.uniqueItems) and true
-    
-    -- if we have a data type matching one of our validation keywords,
-    -- it's not really a data type, so unset it
-    if p.dataType and patterns[p.dataType] then p.dataType = nil end
     
     -- default data type is string
     if not p.dataType then p.dataType = 'string' end

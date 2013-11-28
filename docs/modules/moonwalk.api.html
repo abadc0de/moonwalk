@@ -40,24 +40,30 @@
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><strong>api</strong></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
-  <li><a href="../modules/moonwalk.util.html">util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><strong>moonwalk.api</strong></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">moonwalk.api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">moonwalk.sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -103,20 +109,20 @@
 <h2><a href="#Request_handling_functions">Request handling functions </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#api:create_connection">api:create_connection ()</a></td>
+	<td class="name" nowrap><a href="#create_connection">create_connection ()</a></td>
 	<td class="summary">Create a <a href="../modules/moonwalk.connection.html">connection</a>  base object suitable for the current
  host environment.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#api:get_connection">api:get_connection (hostdata)</a></td>
+	<td class="name" nowrap><a href="#get_connection">get_connection (hostdata)</a></td>
 	<td class="summary">Instantiate a new <a href="../modules/moonwalk.connection.html">connection</a>  object.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#api:handle_request">api:handle_request (hostdata)</a></td>
+	<td class="name" nowrap><a href="#handle_request">handle_request (hostdata)</a></td>
 	<td class="summary">handle the request.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#api:load_class">api:load_class (path)</a></td>
+	<td class="name" nowrap><a href="#load_class">load_class (path)</a></td>
 	<td class="summary">Load an API class.</td>
 	</tr>
 </table>
@@ -143,6 +149,8 @@
     <dd>
     Instantiate an API class.  See <a href="../modules/moonwalk.api.class.html">api.class</a>  constructor.
 
+    </ul>
+
 
 
 
@@ -156,6 +164,8 @@
     <dd>
     Instantiate an API model.  See <a href="../modules/moonwalk.api.model.html">api.model</a>  constructor.
 
+    </ul>
+
 
 
 
@@ -168,6 +178,8 @@
     </dt>
     <dd>
     Instantiate an API operation.  See <a href="../modules/moonwalk.api.operation.html">api.operation</a>  constructor.
+
+    </ul>
 
 
 
@@ -188,6 +200,8 @@
 
 <p> A numeric table containing paths to implementations of
   <a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a> .
+
+    </ul>
 
     <h3>Fields:</h3>
     <ul>
@@ -222,6 +236,8 @@
 
 <p> Defaults to <code>'1.2'</code>.
 
+    </ul>
+
 
 
 
@@ -237,6 +253,8 @@
 
 <p> Defaults to <code>'1.0'</code>.
 
+    </ul>
+
 
 
 
@@ -246,23 +264,25 @@
 </dl>
     <h2><a name="Request_handling_functions"></a>Request handling functions </h2>
           Call these from your controller.
- Call <a href="../modules/moonwalk.api.html#api:load_class">api:load_class</a>  once for each <a href="../modules/moonwalk.api.class.html">api.class</a>  module, then call
- <a href="../modules/moonwalk.api.html#api:handle_request">api:handle_request</a> .
+ Call <a href="../modules/moonwalk.api.html#load_class">api:load_class</a>  once for each <a href="../modules/moonwalk.api.class.html">api.class</a>  module, then call
+ <a href="../modules/moonwalk.api.html#handle_request">api:handle_request</a> .
     <dl class="function">
     <dt>
-    <a name = "api:create_connection"></a>
-    <strong>api:create_connection ()</strong>
+    <a name = "create_connection"></a>
+    <strong>create_connection ()</strong>
     </dt>
     <dd>
     Create a <a href="../modules/moonwalk.connection.html">connection</a>  base object suitable for the current
  host environment.
+ request.
+
+    </ul>
 
 
     <h3>Returns:</h3>
     <ol>
 
          A connection object that will be instantiated once per
- request.
     </ol>
 
 
@@ -270,13 +290,15 @@
 
 </dd>
     <dt>
-    <a name = "api:get_connection"></a>
-    <strong>api:get_connection (hostdata)</strong>
+    <a name = "get_connection"></a>
+    <strong>get_connection (hostdata)</strong>
     </dt>
     <dd>
     Instantiate a new <a href="../modules/moonwalk.connection.html">connection</a>  object. </p>
 
-<p> Creates an instance of the base object returned by <a href="../modules/moonwalk.api.html#api:create_connection">api:create_connection</a> .
+<p> Creates an instance of the base object returned by <a href="../modules/moonwalk.api.html#create_connection">api:create_connection</a> .
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -298,11 +320,13 @@
 
 </dd>
     <dt>
-    <a name = "api:handle_request"></a>
-    <strong>api:handle_request (hostdata)</strong>
+    <a name = "handle_request"></a>
+    <strong>handle_request (hostdata)</strong>
     </dt>
     <dd>
     handle the request.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -319,14 +343,16 @@
 
 </dd>
     <dt>
-    <a name = "api:load_class"></a>
-    <strong>api:load_class (path)</strong>
+    <a name = "load_class"></a>
+    <strong>load_class (path)</strong>
     </dt>
     <dd>
     Load an API class. </p>
 
 <p> Loads a module containing an <a href="../modules/moonwalk.api.class.html">api.class</a>  instance, and registers the class
  with the API.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>

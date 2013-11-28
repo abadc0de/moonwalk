@@ -2,8 +2,6 @@
 --- Text processing utilities.
 --
 
-
-
 local function _dump(tt, indent, done)
   done = done or {}
   indent = indent or 0

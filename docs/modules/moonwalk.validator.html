@@ -39,24 +39,30 @@
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../modules/moonwalk.api.html">api</a></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
-  <li><a href="../modules/moonwalk.util.html">util</a></li>
-  <li><strong>validator</strong></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><a href="../modules/moonwalk.api.html">moonwalk.api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">moonwalk.api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">moonwalk.sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
+  <li><strong>moonwalk.validator</strong></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -105,6 +111,9 @@
     </dt>
     <dd>
     Creates an object representing failure.
+ a <a href="../modules/moonwalk.connection.html">connection</a>  instance.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -120,7 +129,6 @@
     <ol>
 
          An object with a <code>.fail</code> method taking one argument,
- a <a href="../modules/moonwalk.connection.html">connection</a>  instance.
     </ol>
 
 
@@ -140,6 +148,8 @@
     </dt>
     <dd>
     Validate a string containing a JSON object or array.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -170,6 +180,8 @@
     <dd>
     Validate a string.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">value</span>
@@ -198,6 +210,8 @@
     </dt>
     <dd>
     Validate a number.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>

@@ -8,7 +8,6 @@
 --
 local util = require 'moonwalk/util'
 
---- @type module
 local connection = {}
 
 -- Unpack a sparse numeric table with a "length" property

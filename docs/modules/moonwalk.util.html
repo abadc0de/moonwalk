@@ -38,24 +38,30 @@
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../modules/moonwalk.api.html">api</a></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><a href="../modules/moonwalk.api.operation.html">api.operation</a></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
-  <li><strong>util</strong></li>
-  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><a href="../modules/moonwalk.api.html">moonwalk.api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><a href="../modules/moonwalk.api.operation.html">moonwalk.api.operation</a></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">moonwalk.sugar</a></li>
+  <li><strong>moonwalk.util</strong></li>
+  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -126,6 +132,8 @@
  not appropriate for environments like CGI. See Lua
  <a href="http://lua-users.org/wiki/TableSerialization">Table Serialization</a>.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">...</span>
@@ -144,6 +152,8 @@
     </dt>
     <dd>
     Trim leading and trailing slashes from a path.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -173,6 +183,8 @@
     <dd>
     Make path have exactly one leading and one trailing slash.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
@@ -201,6 +213,8 @@
     <dd>
     Encode JSON.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">data</span>
@@ -228,6 +242,8 @@
     </dt>
     <dd>
     Decode JSON.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -260,6 +276,8 @@
 <p> See <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.4">HTML Forms</a>
  and <a href="http://www.ietf.org/rfc/rfc1738">RFC 1738</a>.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">text</span>
@@ -287,6 +305,8 @@
     </dt>
     <dd>
     Decode URI component.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -319,6 +339,8 @@
 <p> This function is not used by Moonwalk, it is provided for the
  API author's convenience.
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">data</span>
@@ -346,6 +368,8 @@
     </dt>
     <dd>
     Decode a query string into a table.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>

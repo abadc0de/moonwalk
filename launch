@@ -9,10 +9,20 @@ build() {
   source_url="https://github.com/abadc0de/moonwalk"
   name="$package-$version"
   rm -rf rocks/*
+  echo "
+  ===     Building rocks    ===
+  "
   luarocks build --local rockspec/$name.rockspec
-  luarocks pack $package
+  echo "
+  ===     Packing rocks     ===
+  "
+  luarocks pack --local $package
+  luarocks remove --local $package
   mv *.rock rocks
   cp rockspec/$name.rockspec rocks/
+  echo "
+  ===     Making manifest   ===
+  "
   luarocks-admin make-manifest rocks/
   mkdir rocks/$package
   echo "<!doctype html>
@@ -21,8 +31,10 @@ build() {
 </head><body>
 <code>Redirecting to <a href='$source_url'>$source_url</a></code>
 </body></html>" > rocks/$package/index.html
-
-   rm -rf docs/*; lua ../LDoc/ldoc.lua .
+  echo "
+  ===     Running LDoc      ===
+  "
+  rm -rf docs/*; lua ../LDoc/ldoc.lua .
 
 }
 
@@ -59,13 +71,10 @@ else
   fi
   
   if [ "$host" == "socket" ]; then
-    build
     lua moonwalk/server/socket.lua /$path/ $port
   elif [ "$host" == "luanode" ]; then
-    build
     bin/luanode moonwalk/server/luanode.lua /$path/ $port
   elif [ "$host" == "mongoose" ] || [ "$host" == "civetweb" ]; then
-    build
     bin/$host -document_root .. -listening_ports $port \
     -url_rewrite_patterns /$path/**=$path/index.lp
   else

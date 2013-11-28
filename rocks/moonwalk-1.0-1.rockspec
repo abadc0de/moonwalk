@@ -21,10 +21,10 @@ build = {
    -- TODO: generate this damn thing
    modules = {
       
-      ["moonwalk.api"] = "moonwalk/api.lua",
-      ["moonwalk.api.class"] = "moonwalk/api/class.lua",
-      ["moonwalk.api.model"] = "moonwalk/api/model.lua",
-      ["moonwalk.api.operation"] = "moonwalk/api/operation.lua",
+      ["moonwalk.api"] = "api.lua",
+      ["moonwalk.api.class"] = "api/class.lua",
+      ["moonwalk.api.model"] = "api/model.lua",
+      ["moonwalk.api.operation"] = "api/operation.lua",
       
       ["moonwalk.connection"] = "connection.lua",
       ["moonwalk.connection.abstract"] = "connection/abstract.lua",

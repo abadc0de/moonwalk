@@ -32,30 +32,37 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Class_module">Class module </a></li>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
 </ul>
 
 
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../modules/moonwalk.api.html">api</a></li>
-  <li><a href="../modules/moonwalk.api.class.html">api.class</a></li>
-  <li><a href="../modules/moonwalk.api.model.html">api.model</a></li>
-  <li><strong>api.operation</strong></li>
-  <li><a href="../modules/moonwalk.connection.html">connection</a></li>
-  <li><a href="../modules/moonwalk.connection.abstract.html">connection.abstract</a></li>
-  <li><a href="../modules/moonwalk.drive.html">drive</a></li>
-  <li><a href="../modules/moonwalk.proto.html">proto</a></li>
-  <li><a href="../modules/moonwalk.resources.html">resources</a></li>
-  <li><a href="../modules/moonwalk.server.luanode.html">server.luanode</a></li>
-  <li><a href="../modules/moonwalk.server.socket.html">server.socket</a></li>
-  <li><a href="../modules/moonwalk.sugar.html">sugar</a></li>
-  <li><a href="../modules/moonwalk.util.html">util</a></li>
-  <li><a href="../modules/moonwalk.validator.html">validator</a></li>
+  <li><a href="../modules/example.user.html">example.user</a></li>
+  <li><a href="../modules/moonwalk.api.html">moonwalk.api</a></li>
+  <li><a href="../modules/moonwalk.api.class.html">moonwalk.api.class</a></li>
+  <li><a href="../modules/moonwalk.api.model.html">moonwalk.api.model</a></li>
+  <li><strong>moonwalk.api.operation</strong></li>
+  <li><a href="../modules/moonwalk.connection.html">moonwalk.connection</a></li>
+  <li><a href="../modules/moonwalk.connection.abstract.html">moonwalk.connection.abstract</a></li>
+  <li><a href="../modules/moonwalk.drive.html">moonwalk.drive</a></li>
+  <li><a href="../modules/moonwalk.proto.html">moonwalk.proto</a></li>
+  <li><a href="../modules/moonwalk.resources.html">moonwalk.resources</a></li>
+  <li><a href="../modules/moonwalk.server.luanode.html">moonwalk.server.luanode</a></li>
+  <li><a href="../modules/moonwalk.server.socket.html">moonwalk.server.socket</a></li>
+  <li><a href="../modules/moonwalk.sugar.html">moonwalk.sugar</a></li>
+  <li><a href="../modules/moonwalk.util.html">moonwalk.util</a></li>
+  <li><a href="../modules/moonwalk.validator.html">moonwalk.validator</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../examples/index.lua.html">index.lua</a></li>
+  <li><a href="../examples/user.lua.html">user.lua</a></li>
 </ul>
 
 </div>
@@ -67,31 +74,34 @@
 <p> Extends the <a href="../modules/moonwalk.proto.html">proto</a>  object.</p>
 
 
-<h2><a href="#Class_module">Class module </a></h2>
+<h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#module.use_markdown">module.use_markdown</a></td>
-	<td class="summary">Use Markdown to format the "notes" section of the doc block.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#module.summary_format">module.summary_format</a></td>
-	<td class="summary">Format string for the "summary" section of a doc block.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#module.notes_format">module.notes_format</a></td>
-	<td class="summary">Format string for the "notes" section of a doc block.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#operation:constructor">operation:constructor (docstring, fn)</a></td>
+	<td class="name" nowrap><a href="#constructor">constructor ([docstring], fn)</a></td>
 	<td class="summary">Create an operation.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#operation:decode_docblock">operation:decode_docblock (name, api)</a></td>
+	<td class="name" nowrap><a href="#decode_docblock">decode_docblock (name, api)</a></td>
 	<td class="summary">Decode docblock for function.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#operation:prepare">operation:prepare (connection)</a></td>
+	<td class="name" nowrap><a href="#prepare">prepare (connection)</a></td>
 	<td class="summary">Finds an appropriate operation to handle a request.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#use_markdown">use_markdown</a></td>
+	<td class="summary">Use Markdown to format the "notes" section of the doc block.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#summary_format">summary_format</a></td>
+	<td class="summary">Format string for the "summary" section of a doc block.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#notes_format">notes_format</a></td>
+	<td class="summary">Format string for the "notes" section of a doc block.</td>
 	</tr>
 </table>
 
@@ -99,69 +109,27 @@
 <br/>
 
 
-    <h2><a name="Class_module"></a>Class module </h2>
-
+    <h2><a name="Functions"></a>Functions</h2>
     <dl class="function">
     <dt>
-    <a name = "module.use_markdown"></a>
-    <strong>module.use_markdown</strong>
-    </dt>
-    <dd>
-    Use Markdown to format the "notes" section of the doc block. </p>
-
-<p> Defaults to <code>true</code>.
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "module.summary_format"></a>
-    <strong>module.summary_format</strong>
-    </dt>
-    <dd>
-    Format string for the "summary" section of a doc block. </p>
-
-<p> Replacement tokens: <code>{nickname}</code>, <code>{summary}</code>, <code>{notes}</code>
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "module.notes_format"></a>
-    <strong>module.notes_format</strong>
-    </dt>
-    <dd>
-    Format string for the "notes" section of a doc block. </p>
-
-<p> Replacement tokens: <code>{nickname}</code>, <code>{summary}</code>, <code>{notes}</code>
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "operation:constructor"></a>
-    <strong>operation:constructor (docstring, fn)</strong>
+    <a name = "constructor"></a>
+    <strong>constructor ([docstring], fn)</strong>
     </dt>
     <dd>
     Create an operation.  This function is not meant to be called directly
  (see <a href="../modules/moonwalk.proto.html#constructor">proto.constructor</a> ).
 
+    </ul>
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">docstring</span>
-         A string documenting the function, as described in the
- readme.
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         A string documenting the function, as
+ described in the readme.
         </li>
         <li><span class="parameter">fn</span>
+            <span class="types">optional <span class="type">function</span></span>
          A function to handle this operation.
         </li>
     </ul>
@@ -172,11 +140,13 @@
 
 </dd>
     <dt>
-    <a name = "operation:decode_docblock"></a>
-    <strong>operation:decode_docblock (name, api)</strong>
+    <a name = "decode_docblock"></a>
+    <strong>decode_docblock (name, api)</strong>
     </dt>
     <dd>
     Decode docblock for function.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -205,15 +175,19 @@
 
 </dd>
     <dt>
-    <a name = "operation:prepare"></a>
-    <strong>operation:prepare (connection)</strong>
+    <a name = "prepare"></a>
+    <strong>prepare (connection)</strong>
     </dt>
     <dd>
     Finds an appropriate operation to handle a request. </p>
 
 <p> Extracts arguments from the request, and validates them based
  on the API author's validation rules. Modifies the request table
- with information about the extracted arguments if validation succeeds.
+ with information about the extracted arguments if validation succeeds.</p>
+
+<p> no operation was found.
+
+    </ul>
 
     <h3>Parameters:</h3>
     <ul>
@@ -230,9 +204,62 @@
         A numeric table of arguments, with a <code>length</code> property to
  accomodate sparseness.</li>
         <li>
-         A <a href="../modules/moonwalk.validator.html#failure">validator.failure</a>  instance if validation failed or
- no operation was found.</li>
+         A <a href="../modules/moonwalk.validator.html#failure">validator.failure</a>  instance if validation failed or</li>
     </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Fields"></a>Fields</h2>
+    <dl class="function">
+    <dt>
+    <a name = "use_markdown"></a>
+    <strong>use_markdown</strong>
+    </dt>
+    <dd>
+    Use Markdown to format the "notes" section of the doc block. </p>
+
+<p> Defaults to <code>true</code>.
+
+    </ul>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "summary_format"></a>
+    <strong>summary_format</strong>
+    </dt>
+    <dd>
+    Format string for the "summary" section of a doc block. </p>
+
+<p> Replacement tokens: <code>{nickname}</code>, <code>{summary}</code>, <code>{notes}</code>
+
+    </ul>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "notes_format"></a>
+    <strong>notes_format</strong>
+    </dt>
+    <dd>
+    Format string for the "notes" section of a doc block. </p>
+
+<p> Replacement tokens: <code>{nickname}</code>, <code>{summary}</code>, <code>{notes}</code>
+
+    </ul>
+
+
 
 
 

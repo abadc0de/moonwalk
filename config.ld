@@ -18,7 +18,8 @@ To add support for a new host environment, see `connection.abstract`
 at the `server.socket` and `server.luanode` source).
 
 ]]
-file = {'moonwalk', exclude = {
+file = {'moonwalk', 'example', exclude = {
+  'example/moonwalk/', 
   'moonwalk/lib/', 
   'moonwalk/connection/cgi.lua',
   'moonwalk/connection/luanode.lua',
@@ -26,12 +27,17 @@ file = {'moonwalk', exclude = {
   'moonwalk/connection/socket.lua',
 }}
 
+examples = {'example', exclude = { 'example/moonwalk/' }}
+
 readme = { 
   'README.md',
-
 }
 
-new_type('path', 'Resource path') 
+custom_tags = {
+  { 'path', title = 'Resource path', format = function(v) return
+    '<pre>' .. v:gsub('^%s-(%w+)', '<b>%1</b>') .. '</pre>' end }, 
+} 
+
 
 sort_modules = true
 sort = false
@@ -40,3 +46,4 @@ dir = 'docs'
 all = false
 format = 'markdown'
 style = 'explorer/css/'
+not_luadoc=true
